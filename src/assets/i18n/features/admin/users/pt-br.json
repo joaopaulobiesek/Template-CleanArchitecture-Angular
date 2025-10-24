@@ -1,0 +1,78 @@
+{
+  "users": {
+    "title": "Gestão de Usuários",
+    "description": "Gerencie usuários, permissões e acessos ao sistema",
+    "noData": "Nenhum usuário encontrado",
+    "emptyMessage": "Não há usuários que correspondam aos filtros selecionados.",
+    "createFirst": "Criar Primeiro Usuário",
+    "totalCount": "Total de {count} usuários",
+    "search": "Buscar usuários...",
+    "availableRoles": "Roles Disponíveis",
+    "viewPermissions": "Ver Permissões",
+    "noRoles": "Nenhuma role atribuída",
+    "noPolicies": "Nenhuma política atribuída",
+    "userId": "ID:",
+    "fields": {
+      "name": "Nome",
+      "fullName": "Nome Completo",
+      "email": "E-mail",
+      "phone": "Telefone",
+      "role": "Função",
+      "roles": "Roles",
+      "permissions": "Permissões",
+      "actions": "Ações",
+      "policies": "Políticas",
+      "password": "Senha",
+      "status": "Status",
+      "createdAt": "Criado em",
+      "updatedAt": "Atualizado em"
+    },
+    "form": {
+      "createTitle": "Novo Usuário",
+      "addUser": "Adicionar Usuário",
+      "editTitle": "Editar Usuário",
+      "viewPermissionsTitle": "Permissões do Usuário",
+      "fillRequired": "Por favor, preencha todos os campos obrigatórios",
+      "createSuccess": "Usuário cadastrado com sucesso!",
+      "updateSuccess": "Usuário atualizado com sucesso!",
+      "deleteSuccess": "Usuário excluído com sucesso!",
+      "createError": "Falha ao cadastrar usuário",
+      "updateError": "Falha ao atualizar usuário",
+      "deleteError": "Falha ao excluir usuário",
+      "fullNamePlaceholder": "Ex: João da Silva",
+      "emailPlaceholder": "email@exemplo.com",
+      "passwordPlaceholder": "Digite a senha",
+      "phonePlaceholder": "(11) 99999-9999",
+      "selectPolicies": "Selecione as políticas",
+      "selectRoles": "Selecione as regras",
+      "searchPolicies": "Buscar políticas...",
+      "searchRoles": "Buscar regras...",
+      "cancel": "Cancelar",
+      "save": "Salvar",
+      "close": "Fechar",
+      "rolesLabel": "Regras (Roles)",
+      "policiesLabel": "Políticas",
+      "policiesCount": "Políticas ({count})"
+    },
+    "stats": {
+      "total": "Total de Usuários",
+      "thisPage": "Nesta Página"
+    },
+    "errors": {
+      "title": "Erro ao carregar usuários",
+      "message": "Ocorreu um erro ao buscar os usuários. Por favor, tente novamente.",
+      "code": "Código:",
+      "tryAgain": "Tentar Novamente"
+    },
+    "loading": {
+      "title": "Carregando usuários...",
+      "message": "Por favor, aguarde enquanto buscamos as informações"
+    },
+    "pagination": {
+      "showing": "Mostrando",
+      "to": "a",
+      "of": "de",
+      "items": "usuários"
+    }
+  }
+}

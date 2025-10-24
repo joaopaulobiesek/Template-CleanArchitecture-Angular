@@ -1,0 +1,609 @@
+<!-- ========================================
+     WRAPPER PRINCIPAL
+     ======================================== -->
+<div class="app-container">
+
+  <!-- ========================================
+       PAGE HEADER
+       ======================================== -->
+  <div class="page-header">
+    <div class="header-content">
+      <i class="pi pi-users header-icon"></i>
+      <div class="header-text">
+        <h1 class="page-title">{{ 'users.title' | translate }}</h1>
+        <p class="page-subtitle">{{ 'users.description' | translate }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================
+       STATS CARDS
+       ======================================== -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon green">
+        <i class="pi pi-users"></i>
+      </div>
+      <div class="stat-content">
+        <div class="stat-value">{{ totalItems }}</div>
+        <div class="stat-label">{{ 'users.stats.total' | translate }}</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon yellow">
+        <i class="pi pi-user-plus"></i>
+      </div>
+      <div class="stat-content">
+        <div class="stat-value">{{ data()?.data?.length || 0 }}</div>
+        <div class="stat-label">{{ 'users.stats.thisPage' | translate }}</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon red">
+        <i class="pi pi-shield"></i>
+      </div>
+      <div class="stat-content">
+        <div class="stat-value">{{ rulesList().length }}</div>
+        <div class="stat-label">{{ 'users.availableRoles' | translate }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================
+       MAIN CONTENT CARD
+       ======================================== -->
+  <div class="content-card">
+
+    <!-- ========================================
+         MAIN TOOLBAR (Busca + Botões)
+         ======================================== -->
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <div class="search-container">
+          <app-search-debounce
+            [placeholder]="'users.search' | translate"
+            (onSearchChange)="search($event)">
+          </app-search-debounce>
+        </div>
+      </div>
+
+      <div class="toolbar-right">
+        <button class="btn btn-primary" (click)="openCreateModal()">
+          <i class="pi pi-user-plus"></i>
+          <span>{{ 'users.form.createTitle' | translate }}</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ========================================
+         TABLE CONTAINER
+         ======================================== -->
+    <div class="card-body">
+
+      @if (!loading() && isBrowser) {
+
+        <!-- ========================================
+             PRIMENG TABLE
+             ======================================== -->
+        <p-table
+          [value]="data()?.data!"
+          [customSort]="true"
+          (sortFunction)="customSort($event)">
+
+          <!-- ========================================
+               HEADER DA TABELA
+               ======================================== -->
+          <ng-template pTemplate="header">
+            <tr>
+              <!-- Coluna: Nome -->
+              <th pSortableColumn="fullName" class="sortable-column">
+                <div class="column-header">
+                  <span>{{ 'users.fields.name' | translate }}</span>
+                  <p-sortIcon field="fullName"></p-sortIcon>
+                </div>
+              </th>
+
+              <!-- Coluna: Email -->
+              <th pSortableColumn="email" class="sortable-column hide-mobile">
+                <div class="column-header">
+                  <span>{{ 'users.fields.email' | translate }}</span>
+                  <p-sortIcon field="email"></p-sortIcon>
+                </div>
+              </th>
+
+              <!-- Coluna: Telefone -->
+              <th class="hide-mobile">
+                <div class="column-header">
+                  <span>{{ 'users.fields.phone' | translate }}</span>
+                </div>
+              </th>
+
+              <!-- Coluna: Roles -->
+              <th>
+                <div class="column-header">
+                  <span>{{ 'users.fields.roles' | translate }}</span>
+                </div>
+              </th>
+
+              <!-- Coluna: Permissões -->
+              <th class="hide-mobile">
+                <div class="column-header">
+                  <span>{{ 'users.fields.permissions' | translate }}</span>
+                </div>
+              </th>
+
+              <!-- Coluna: Ações -->
+              <th class="actions-column">
+                <span>{{ 'users.fields.actions' | translate }}</span>
+              </th>
+            </tr>
+          </ng-template>
+
+          <!-- ========================================
+               BODY DA TABELA
+               ======================================== -->
+          <ng-template pTemplate="body" let-user>
+            <tr>
+              <!-- Cell: Nome -->
+              <td>
+                <div class="item-info">
+                  <div class="item-icon">
+                    <i class="pi pi-user"></i>
+                  </div>
+                  <div class="item-details">
+                    <h4 class="item-title">{{ user.fullName }}</h4>
+                    <p class="item-subtitle">{{ 'users.userId' | translate }} {{ user.id.substring(0, 8) }}...</p>
+                  </div>
+                </div>
+              </td>
+
+              <!-- Cell: Email -->
+              <td class="hide-mobile">
+                <span class="description-text">{{ user.email }}</span>
+              </td>
+
+              <!-- Cell: Telefone -->
+              <td class="hide-mobile">
+                <span>{{ user.phoneNumber || '-' }}</span>
+              </td>
+
+              <!-- Cell: Roles -->
+              <td>
+                <div class="company-tag">
+                  @for (role of user.roles; track role) {
+                    <span class="status-badge" style="background: #6bb800; color: white; margin-right: 4px;">
+                      {{ getRoleDisplayName(role) }}
+                    </span>
+                  }
+                  @if (!user.roles || user.roles.length === 0) {
+                    <span>-</span>
+                  }
+                </div>
+              </td>
+
+              <!-- Cell: Permissões (Contador) -->
+              <td class="hide-mobile">
+                <button class="permissions-eye-btn" (click)="selectedItem = user; viewPermissions()">
+                  <i class="pi pi-eye"></i>
+                  <span>{{ 'users.viewPermissions' | translate }}</span>
+                  @if (user.policies && user.policies.length > 0) {
+                    <span class="permissions-count">{{ user.policies.length }}</span>
+                  }
+                </button>
+              </td>
+
+              <!-- Cell: Ações (menu) -->
+              <td class="actions-column">
+                <button class="action-btn" (click)="openMenu(user, $event)">
+                  <i class="pi pi-ellipsis-v"></i>
+                </button>
+              </td>
+            </tr>
+          </ng-template>
+
+          <!-- ========================================
+               EMPTY STATE (Quando não há dados)
+               ======================================== -->
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="6" class="empty-state-row">
+                <div class="empty-state-content">
+                  <i class="pi pi-users empty-icon"></i>
+                  <h3 class="empty-title">{{ 'users.noData' | translate }}</h3>
+                  <p class="empty-message">
+                    {{ 'users.emptyMessage' | translate }}
+                  </p>
+                  <button class="btn btn-primary" (click)="openCreateModal()">
+                    <i class="pi pi-user-plus"></i>
+                    {{ 'users.createFirst' | translate }}
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </ng-template>
+
+        </p-table>
+
+        <!-- ========================================
+             PAGINATION
+             ======================================== -->
+        @if (data()) {
+          <div class="pagination-container">
+            <div class="pagination-info">
+              {{ 'users.pagination.showing' | translate }}
+              <strong class="info-highlight">{{ (currentPage - 1) * numberOfRows + 1 }}</strong>
+              {{ 'users.pagination.to' | translate }}
+              <strong class="info-highlight">{{ min(currentPage * numberOfRows, totalItems) }}</strong>
+              {{ 'users.pagination.of' | translate }}
+              <strong class="info-highlight">{{ totalItems }}</strong>
+              {{ 'users.pagination.items' | translate }}
+            </div>
+            <p-paginator
+              [first]="(currentPage - 1) * numberOfRows"
+              (onPageChange)="onPageChange($event)"
+              [rows]="numberOfRows"
+              [totalRecords]="totalItems"
+              [rowsPerPageOptions]="rowsPerPageOptions">
+            </p-paginator>
+          </div>
+        }
+
+      } @else {
+
+        <!-- ========================================
+             LOADING STATE (Quando está carregando)
+             ======================================== -->
+        <div class="loading-container">
+          <div class="loading-header">
+            <div class="loading-spinner">
+              <i class="pi pi-spinner pi-spin"></i>
+            </div>
+            <h3 class="loading-title">{{ 'users.loading.title' | translate }}</h3>
+            <p class="loading-message">{{ 'users.loading.message' | translate }}</p>
+          </div>
+
+          <!-- Shimmer Effect -->
+          <div class="shimmer-container">
+            <div class="shimmer-header shimmer"></div>
+            @for (i of [1,2,3,4,5]; track i) {
+              <div class="shimmer-row">
+                <div class="shimmer-cell shimmer" style="width: 25%"></div>
+                <div class="shimmer-cell shimmer" style="width: 25%"></div>
+                <div class="shimmer-cell shimmer" style="width: 15%"></div>
+                <div class="shimmer-cell shimmer" style="width: 20%"></div>
+                <div class="shimmer-cell shimmer" style="width: 15%"></div>
+              </div>
+            }
+          </div>
+        </div>
+
+      }
+    </div>
+  </div>
+</div>
+
+<!-- ========================================
+     ERROR STATE
+     ======================================== -->
+@if (error()) {
+  <div class="content-card">
+    <div class="error-container">
+      <div class="error-icon">
+        <i class="pi pi-exclamation-triangle"></i>
+      </div>
+      <h3 class="error-title">{{ 'users.errors.title' | translate }}</h3>
+      <p class="error-message">
+        {{ error()?.message || ('users.errors.message' | translate) }}
+      </p>
+      @if (error()?.status) {
+        <div class="error-details">
+          <span>{{ 'users.errors.code' | translate }} {{ error()?.status }}</span>
+          <span class="detail-separator">•</span>
+          <span>{{ error()?.statusText }}</span>
+        </div>
+      }
+      <button class="btn btn-primary" (click)="search()">
+        <i class="pi pi-refresh"></i>
+        {{ 'users.errors.tryAgain' | translate }}
+      </button>
+    </div>
+  </div>
+}
+
+<!-- ========================================
+     MODAL: CRIAR USUÁRIO (PrimeNG Dialog)
+     ======================================== -->
+<p-dialog
+  [(visible)]="showCreateModal"
+  [modal]="true"
+  [style]="{width: '600px'}"
+  [draggable]="false"
+  [resizable]="false"
+  styleClass="user-dialog">
+
+  <ng-template pTemplate="header">
+    <div class="dialog-header">
+      <i class="pi pi-user-plus"></i>
+      <h3>{{ 'users.form.addUser' | translate }}</h3>
+    </div>
+  </ng-template>
+
+  <form [formGroup]="createUserForm">
+    <div class="form-group">
+      <label for="createFullName">{{ 'users.fields.fullName' | translate }}</label>
+      <input
+        id="createFullName"
+        type="text"
+        pInputText
+        [placeholder]="'users.form.fullNamePlaceholder' | translate"
+        formControlName="fullName"
+        class="w-100" />
+    </div>
+
+    <div class="form-group">
+      <label for="createEmail">{{ 'users.fields.email' | translate }}</label>
+      <input
+        id="createEmail"
+        type="email"
+        pInputText
+        [placeholder]="'users.form.emailPlaceholder' | translate"
+        formControlName="email"
+        class="w-100" />
+    </div>
+
+    <div class="form-group">
+      <label for="createPassword">{{ 'users.fields.password' | translate }}</label>
+      <input
+        id="createPassword"
+        type="password"
+        pInputText
+        [placeholder]="'users.form.passwordPlaceholder' | translate"
+        formControlName="password"
+        class="w-100" />
+    </div>
+
+    <div class="form-group">
+      <label for="createPhoneNumber">{{ 'users.fields.phone' | translate }}</label>
+      <input
+        id="createPhoneNumber"
+        type="text"
+        pInputText
+        [placeholder]="'users.form.phonePlaceholder' | translate"
+        formControlName="phoneNumber"
+        class="w-100" />
+    </div>
+
+    <div class="form-group">
+      <label for="createPolicies">{{ 'users.form.policiesLabel' | translate }}</label>
+      <p-multiSelect
+        id="createPolicies"
+        [options]="policiesList()"
+        optionLabel="value"
+        optionValue="key"
+        panelStyleClass="policies-panel"
+        [placeholder]="'users.form.selectPolicies' | translate"
+        [showClear]="true"
+        [filter]="true"
+        [filterPlaceHolder]="'users.form.searchPolicies' | translate"
+        formControlName="policies"
+        appendTo="body"
+        class="w-100">
+      </p-multiSelect>
+    </div>
+
+    <div class="form-group">
+      <label for="createRoles">{{ 'users.form.rolesLabel' | translate }}</label>
+      <p-multiSelect
+        id="createRoles"
+        [options]="rulesList()"
+        optionLabel="value"
+        optionValue="key"
+        panelStyleClass="policies-panel"
+        [placeholder]="'users.form.selectRoles' | translate"
+        [showClear]="true"
+        [filter]="true"
+        [filterPlaceHolder]="'users.form.searchRoles' | translate"
+        formControlName="roles"
+        appendTo="body"
+        class="w-100">
+      </p-multiSelect>
+    </div>
+  </form>
+
+  <ng-template pTemplate="footer">
+    <button class="btn btn-secondary" (click)="closeCreateModal()">
+      <i class="pi pi-times"></i>
+      {{ 'users.form.cancel' | translate }}
+    </button>
+    <button class="btn btn-primary" (click)="onSubmitCreate()">
+      <i class="pi pi-check"></i>
+      {{ 'users.form.save' | translate }}
+    </button>
+  </ng-template>
+</p-dialog>
+
+<!-- ========================================
+     MODAL: EDITAR USUÁRIO (PrimeNG Dialog)
+     ======================================== -->
+<p-dialog
+  [(visible)]="showUpdateModal"
+  [modal]="true"
+  [style]="{width: '600px'}"
+  [draggable]="false"
+  [resizable]="false"
+  styleClass="user-dialog">
+
+  <ng-template pTemplate="header">
+    <div class="dialog-header">
+      <i class="pi pi-pencil"></i>
+      <h3>{{ 'users.form.editTitle' | translate }}</h3>
+    </div>
+  </ng-template>
+
+  <form [formGroup]="updateUserForm">
+    <div class="form-group">
+      <label for="updateFullName">{{ 'users.fields.fullName' | translate }}</label>
+      <input
+        id="updateFullName"
+        type="text"
+        pInputText
+        [placeholder]="'users.form.fullNamePlaceholder' | translate"
+        formControlName="fullName"
+        class="w-100" />
+    </div>
+
+    <div class="form-group">
+      <label for="updateEmail">{{ 'users.fields.email' | translate }}</label>
+      <input
+        id="updateEmail"
+        type="email"
+        pInputText
+        [placeholder]="'users.form.emailPlaceholder' | translate"
+        formControlName="email"
+        class="w-100" />
+    </div>
+
+    <div class="form-group">
+      <label for="updatePhoneNumber">{{ 'users.fields.phone' | translate }}</label>
+      <input
+        id="updatePhoneNumber"
+        type="text"
+        pInputText
+        [placeholder]="'users.form.phonePlaceholder' | translate"
+        formControlName="phoneNumber"
+        class="w-100" />
+    </div>
+
+    <div class="form-group">
+      <label for="updatePolicies">{{ 'users.form.policiesLabel' | translate }}</label>
+      <p-multiSelect
+        id="updatePolicies"
+        [options]="policiesList()"
+        optionLabel="value"
+        optionValue="key"
+        panelStyleClass="policies-panel"
+        [placeholder]="'users.form.selectPolicies' | translate"
+        [showClear]="true"
+        [filter]="true"
+        [filterPlaceHolder]="'users.form.searchPolicies' | translate"
+        formControlName="policies"
+        appendTo="body"
+        class="w-100">
+      </p-multiSelect>
+    </div>
+
+    <div class="form-group">
+      <label for="updateRoles">{{ 'users.form.rolesLabel' | translate }}</label>
+      <p-multiSelect
+        id="updateRoles"
+        [options]="rulesList()"
+        optionLabel="value"
+        optionValue="key"
+        panelStyleClass="policies-panel"
+        [placeholder]="'users.form.selectRoles' | translate"
+        [showClear]="true"
+        [filter]="true"
+        [filterPlaceHolder]="'users.form.searchRoles' | translate"
+        formControlName="roles"
+        appendTo="body"
+        class="w-100">
+      </p-multiSelect>
+    </div>
+  </form>
+
+  <ng-template pTemplate="footer">
+    <button class="btn btn-secondary" (click)="closeUpdateModal()">
+      <i class="pi pi-times"></i>
+      {{ 'users.form.cancel' | translate }}
+    </button>
+    <button class="btn btn-primary" (click)="onSubmitUpdate()">
+      <i class="pi pi-check"></i>
+      {{ 'users.form.save' | translate }}
+    </button>
+  </ng-template>
+</p-dialog>
+
+<!-- ========================================
+     MODAL: VER PERMISSÕES (PrimeNG Dialog)
+     ======================================== -->
+<p-dialog
+  [(visible)]="showPermissionsModal"
+  [modal]="true"
+  [style]="{width: '700px'}"
+  [draggable]="false"
+  [resizable]="false"
+  styleClass="permissions-dialog">
+
+  <ng-template pTemplate="header">
+    <div class="dialog-header">
+      <i class="pi pi-shield"></i>
+      <h3>{{ 'users.form.viewPermissionsTitle' | translate }}</h3>
+    </div>
+  </ng-template>
+
+  @if (selectedUser()) {
+    <div class="permissions-dialog-content">
+      <!-- User Header -->
+      <div class="user-header">
+        <div class="user-avatar">
+          <span>{{ getUserInitials(selectedUser()!.fullName) }}</span>
+        </div>
+        <div class="user-info">
+          <h3 class="user-name">{{ selectedUser()!.fullName }}</h3>
+          <p class="user-email">{{ selectedUser()!.email }}</p>
+        </div>
+      </div>
+
+      <!-- Roles Section -->
+      <div class="details-section">
+        <h4 class="section-title">{{ 'users.fields.roles' | translate }}:</h4>
+        <div class="detail-item">
+          <div class="roles-container">
+            @for (role of selectedUser()!.roles; track role) {
+              <span class="role-badge">{{ getRoleDisplayName(role) }}</span>
+            }
+            @if (!selectedUser()!.roles || selectedUser()!.roles.length === 0) {
+              <span>{{ 'users.noRoles' | translate }}</span>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Policies Section -->
+      <div class="policies-section">
+        <h4 class="section-title">{{ 'users.form.policiesLabel' | translate }} ({{ selectedUser()!.policies.length || 0 }}):</h4>
+        <ul class="policies-list">
+          @for (policy of selectedUser()!.policies; track policy) {
+            <li class="policy-item">
+              <i class="pi pi-check policy-icon"></i>
+              <span>{{ getPolicyDisplayName(policy) }}</span>
+            </li>
+          }
+          @if (!selectedUser()!.policies || selectedUser()!.policies.length === 0) {
+            <li class="policy-item">
+              <span>{{ 'users.noPolicies' | translate }}</span>
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+  }
+
+  <ng-template pTemplate="footer">
+    <button class="btn btn-primary" (click)="closePermissionsModal()">
+      <i class="pi pi-times"></i>
+      {{ 'users.form.close' | translate }}
+    </button>
+  </ng-template>
+</p-dialog>
+
+<!-- ========================================
+     PRIMENG COMPONENTS (Final do HTML)
+     ======================================== -->
+<p-toast position="bottom-center" key="bc"></p-toast>
+<p-menu #menu [popup]="true" [model]="items"></p-menu>
+<p-confirmDialog
+  [style]="{width: '500px'}"
+  acceptButtonStyleClass="btn btn-danger"
+  rejectButtonStyleClass="btn btn-secondary">
+</p-confirmDialog>

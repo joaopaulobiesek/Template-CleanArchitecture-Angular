@@ -1,0 +1,30 @@
+<footer class="main-footer"
+    [ngClass]="{'development': environment() === 'dev', 'production': environment() === 'prod'}">
+    <div class="footer-content">
+        <div class="footer-left">
+            <div class="footer-logo">
+                <i class="pi pi-desktop"></i>
+                {{ 'header.template' | translate }}
+            </div>
+            <div class="footer-text">
+                {{ 'footer.copyright' | translate }} 2024–{{ currentYear }} {{ 'header.template' | translate }} — {{ 'footer.developedBy' | translate }}
+                <a href="https://www.wiesoo.com" target="_blank" class="wiesoo-link">Wiesoo</a>
+                {{ 'footer.since' | translate }} 2012
+            </div>
+        </div>
+        <div class="footer-right">
+            <div class="version-info">{{ 'footer.version' | translate }} {{ version() }}</div>
+            @if (environment() === 'dev') {
+            <div class="env-badge">{{ 'footer.environment.development' | translate }}</div>
+            } @else {
+            <div class="env-badge">{{ 'footer.environment.production' | translate }}</div>
+            }
+            @if (environment() === 'dev') {
+            <button class="print-btn" (click)="printForm()">
+                <i class="pi pi-download"></i>
+                {{ 'footer.printForm' | translate }}
+            </button>
+            }
+        </div>
+    </div>
+</footer>

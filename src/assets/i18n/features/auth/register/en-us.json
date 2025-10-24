@@ -1,0 +1,59 @@
+{
+  "register": {
+    "brand": {
+      "title": "Template",
+      "subtitle": "MultiTenant Platform 2025",
+      "features": {
+        "financialManagement": "Smart Financial Management",
+        "whatsappIntegration": "Integrated WhatsApp",
+        "realtimeReports": "Real-time reports",
+        "secureAccess": "Secure and reliable access"
+      }
+    },
+    "welcome": {
+      "title": "Create Account",
+      "descriptionInvite": "Use your invite code to get started",
+      "descriptionFull": "Fill in your details to create your account"
+    },
+    "form": {
+      "nameLabel": "Full Name",
+      "namePlaceholder": "Enter your full name...",
+      "nameMinLength": "Name must be at least 3 characters",
+      "emailLabel": "Email",
+      "emailPlaceholder": "Enter your email...",
+      "emailInvalid": "Enter a valid email",
+      "phoneLabel": "Phone",
+      "phonePlaceholder": "Enter your phone...",
+      "phoneMinLength": "Phone must be at least 10 digits",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Enter your password...",
+      "passwordMinLength": "Password must be at least 6 characters",
+      "confirmPasswordLabel": "Confirm Password",
+      "confirmPasswordPlaceholder": "Confirm your password...",
+      "passwordMismatch": "Passwords do not match",
+      "acceptTerms": "I accept the",
+      "termsOfUse": "Terms of Use",
+      "and": "and the",
+      "privacy": "Privacy Policy",
+      "requiredMark": "*",
+      "continueWithGoogle": "Continue with Google",
+      "createAccountWithoutGoogle": "Create Account without Google",
+      "createAccountButton": "Create Account",
+      "backButton": "Back",
+      "divider": "OR",
+      "footer": {
+        "hasAccount": "Already have an account?",
+        "login": "Sign in"
+      }
+    },
+    "messages": {
+      "acceptTermsRequired": "You need to accept the terms to continue",
+      "inviteCodeRequired": "Enter a valid invite code",
+      "inviteCodeInvalid": "Invalid invite code",
+      "accountCreated": "Account created successfully!",
+      "loggingIn": "Logging in automatically...",
+      "errorCreatingAccount": "Error creating account",
+      "verifyData": "Check the data and invite code"
+    }
+  }
+}

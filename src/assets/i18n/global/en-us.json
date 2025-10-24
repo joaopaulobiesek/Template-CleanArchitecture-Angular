@@ -1,0 +1,76 @@
+{
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "search": "Search",
+    "actions": "Actions",
+    "yes": "Yes",
+    "no": "No",
+    "loading": "Loading...",
+    "warning": "Warning",
+    "success": "Success",
+    "error": "Error",
+    "greeting": "Hello",
+    "back": "Back",
+    "new": "New",
+    "filter": "Filter",
+    "export": "Export",
+    "import": "Import",
+    "refresh": "Refresh",
+    "close": "Close",
+    "confirm": "Confirm",
+    "showing": "Showing",
+    "to": "to",
+    "of": "of",
+    "pleaseWait": "Please wait while we fetch the information"
+  },
+  "menu": {
+    "dashboard": "Dashboard",
+    "clients": "Clients",
+    "users": "Users",
+    "admin": "Administration",
+    "logout": "Logout",
+    "home": "Home"
+  },
+  "header": {
+    "template": "TEMPLATE",
+    "admin": "admin"
+  },
+  "footer": {
+    "allRightsReserved": "All rights reserved",
+    "developedBy": "Developed by",
+    "since": "since",
+    "version": "Version",
+    "copyright": "Copyright ©",
+    "environment": {
+      "development": "DEVELOPMENT ENVIRONMENT",
+      "production": "PRODUCTION ENVIRONMENT"
+    },
+    "printForm": "Print Form"
+  },
+  "auth": {
+    "login": {
+      "title": "Login",
+      "email": "Email",
+      "password": "Password",
+      "rememberMe": "Remember me",
+      "forgotPassword": "Forgot password",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign up",
+      "signIn": "Sign in",
+      "signInWithGoogle": "Sign in with Google"
+    },
+    "register": {
+      "title": "Register",
+      "name": "Name",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "alreadyHaveAccount": "Already have an account?",
+      "signIn": "Sign in",
+      "signUp": "Sign up"
+    }
+  }
+}

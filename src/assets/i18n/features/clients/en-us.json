@@ -1,0 +1,71 @@
+{
+  "clients": {
+    "title": "Clients",
+    "description": "System client management",
+    "noData": "No clients found",
+    "totalCount": "Total of {count} clients",
+    "search": "Search clients...",
+    "noEmail": "No email",
+    "fields": {
+      "fullName": "Full Name",
+      "email": "Email",
+      "phone": "Phone",
+      "documentNumber": "Tax ID",
+      "zipCode": "Zip Code",
+      "paid": "Paid",
+      "status": "Status",
+      "createdAt": "Created at",
+      "updatedAt": "Updated at"
+    },
+    "form": {
+      "createTitle": "New Client",
+      "editTitle": "Edit Client",
+      "fillRequired": "Please fill all required fields",
+      "createSuccess": "Client created successfully!",
+      "updateSuccess": "Client updated successfully!",
+      "deleteSuccess": "Client deleted successfully!",
+      "createError": "Failed to create client",
+      "updateError": "Failed to update client",
+      "deleteError": "Failed to delete client",
+      "confirmDelete": "Are you sure you want to delete this client?",
+      "confirmDeleteMessage": "This action cannot be undone.",
+      "personalInfo": "Personal Information",
+      "contactAddress": "Contact & Address",
+      "paymentStatus": "Payment Status",
+      "paymentInDay": "Client payments up to date",
+      "paymentHint": "Check this option if the client is up to date with payments",
+      "cancel": "Cancel",
+      "save": "Save",
+      "update": "Update",
+      "createSubtitle": "Register a new client in the system",
+      "editSubtitle": "Update client information",
+      "fullNamePlaceholder": "Enter the client's full name",
+      "documentPlaceholder": "000.000.000-00",
+      "emailPlaceholder": "email@example.com",
+      "phonePlaceholder": "(00) 00000-0000",
+      "zipCodePlaceholder": "00000-000",
+      "required": "required",
+      "fullNameRequired": "Full name is required",
+      "fullNameMinLength": "Name must have at least 3 characters",
+      "documentRequired": "Tax ID is required",
+      "documentCannotChange": "Tax ID cannot be changed",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Invalid email",
+      "phoneRequired": "Phone is required",
+      "zipCodeRequired": "Zip code is required"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "pending": "Pending",
+      "paid": "Paid",
+      "unpaid": "Pending"
+    },
+    "errors": {
+      "title": "Error loading clients",
+      "message": "An error occurred while fetching clients. Please try again.",
+      "code": "Code:",
+      "tryAgain": "Try Again"
+    }
+  }
+}

@@ -1,0 +1,96 @@
+/* === LAYOUT === */
+.app-layout {
+    min-height: 100vh;
+    background: var(--surface-ground);
+    position: relative;
+
+    // ✅ Sidebar fechado: conteúdo ocupa tela toda
+    &.sidebar-closed {
+        .app-main {
+            margin-left: 0; // ✅ Sem margem
+        }
+    }
+
+    // ✅ Sidebar aberto: conteúdo tem margem à esquerda
+    &:not(.sidebar-closed) {
+        .app-main {
+            margin-left: 280px; // ✅ Espaço para o sidebar
+
+            // Mobile: sem margem (sidebar é overlay)
+            @media (max-width: 1024px) {
+                margin-left: 0;
+            }
+        }
+    }
+}
+
+/* === OVERLAY (só mobile) === */
+.overlay {
+    display: none; // ✅ Escondido no desktop
+
+    @media (max-width: 1024px) {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 1500; // Abaixo do sidebar (2000)
+        animation: fadeIn 0.3s ease;
+        cursor: pointer;
+        backdrop-filter: blur(2px);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* === MAIN CONTENT === */
+.app-main {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1); // ✅ Transição suave
+}
+
+/* === HEADER === */
+.app-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    flex-shrink: 0;
+}
+
+/* === CONTENT === */
+.app-content {
+    flex: 1;
+    padding: var(--space-xl);
+    background: var(--surface-ground);
+}
+
+/* === FOOTER === */
+.app-footer {
+    flex-shrink: 0;
+    margin-top: auto;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+    .app-content {
+        padding: var(--space-md);
+    }
+}
+
+@media (max-width: 480px) {
+    .app-content {
+        padding: var(--space-sm);
+    }
+}

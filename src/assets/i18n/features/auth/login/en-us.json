@@ -1,0 +1,43 @@
+{
+  "login": {
+    "brand": {
+      "title": "Template",
+      "subtitle": "MultiTenant Platform 2025",
+      "features": {
+        "exhibitorManagement": "Complete exhibitor management",
+        "digitalDocuments": "Digital document control",
+        "realtimeReports": "Real-time reports",
+        "secureAccess": "Secure and reliable access"
+      }
+    },
+    "welcome": {
+      "title": "Welcome!",
+      "description": "Access your Template account to manage exhibitions, documents and much more."
+    },
+    "form": {
+      "emailLabel": "Email or Tax ID",
+      "emailPlaceholder": "Enter your email or tax ID...",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Invalid email",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Enter your password...",
+      "passwordRequired": "Password is required",
+      "passwordMinLength": "Password must be at least 6 characters",
+      "rememberMe": "Remember me",
+      "forgotPassword": "Forgot password?",
+      "loginButton": "Sign in",
+      "divider": "or",
+      "googleButton": "Continue with Google",
+      "createAccount": {
+        "text": "First time here?",
+        "button": "Create account"
+      }
+    },
+    "footer": {
+      "copyright": "© 2025 Template - Developed by",
+      "version": "Version",
+      "termsOfUse": "Terms of Use",
+      "privacy": "Privacy"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+<div class="app-layout" [class.sidebar-closed]="!sidebarOpen()">
+    <!-- ✅ Sidebar (mesmo comportamento desktop e mobile) -->
+    <app-sidebar [isOpen]="sidebarOpen()" [isMobile]="isMobile()" (closeRequest)="closeSidebar()"></app-sidebar>
+
+    <!-- ✅ Overlay (aparece quando sidebar aberto - só mobile) -->
+    @if (sidebarOpen()) {
+    <div class="overlay" (click)="closeSidebar()"></div>
+    }
+
+    <!-- ✅ Main Content -->
+    <div class="app-main">
+        <!-- Header (com hamburger integrado) -->
+        <app-header class="app-header"
+                    [sidebarOpen]="sidebarOpen()"
+                    (toggleSidebar)="toggleSidebar()">
+        </app-header>
+
+        <!-- Content -->
+        <main class="app-content">
+            <router-outlet></router-outlet>
+        </main>
+
+        <!-- Footer -->
+        <app-footer class="app-footer"></app-footer>
+    </div>
+</div>
+<p-toast />

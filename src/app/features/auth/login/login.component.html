@@ -1,0 +1,168 @@
+<!-- ===== login.component.html ===== -->
+<div class="login-container">
+    <!-- Left Panel - Brand & Features -->
+    <div class="login-brand-panel">
+        <div class="brand-content">
+            <!-- Logo Container -->
+            <div class="brand-logo">
+                <div class="logo-icon">
+                    <i class="pi pi-desktop"></i>
+                </div>
+            </div>
+
+            <!-- Brand Title -->
+            <div class="brand-title">
+                <h1>{{ 'login.brand.title' | translate }}</h1>
+                <p class="brand-subtitle">{{ 'login.brand.subtitle' | translate }}</p>
+            </div>
+
+            <!-- Features List -->
+            <div class="brand-features">
+                <div class="feature-item">
+                    <i class="pi pi-check"></i>
+                    <span>{{ 'login.brand.features.exhibitorManagement' | translate }}</span>
+                </div>
+
+                <div class="feature-item">
+                    <i class="pi pi-check"></i>
+                    <span>{{ 'login.brand.features.digitalDocuments' | translate }}</span>
+                </div>
+
+                <div class="feature-item">
+                    <i class="pi pi-check"></i>
+                    <span>{{ 'login.brand.features.realtimeReports' | translate }}</span>
+                </div>
+
+                <div class="feature-item">
+                    <i class="pi pi-check"></i>
+                    <span>{{ 'login.brand.features.secureAccess' | translate }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Panel - Login Form -->
+    <div class="login-form-panel">
+        <div class="form-container">
+            <!-- Welcome Section -->
+            <div class="welcome-section">
+                <!-- Language Selector -->
+                <div style="position: absolute; top: 20px; right: 20px;">
+                    <app-language-selector />
+                </div>
+
+                <div class="welcome-icon">
+                    <i class="pi pi-user"></i>
+                </div>
+
+                <h2 class="welcome-title">{{ 'login.welcome.title' | translate }}</h2>
+                <p class="welcome-description">
+                    {{ 'login.welcome.description' | translate }}
+                </p>
+            </div>
+
+            <!-- Login Form -->
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+                <!-- Email Field -->
+                <div class="form-field">
+                    <label for="email" class="field-label">{{ 'login.form.emailLabel' | translate }}</label>
+                    <div class="input-container">
+                        <i class="pi pi-envelope input-icon"></i>
+                        <input id="email" type="email" pInputText formControlName="email"
+                            [placeholder]="'login.form.emailPlaceholder' | translate" class="form-input  with-icon"
+                            [class.input-error]="email?.invalid && email?.touched" />
+                    </div>
+
+                    @if (email?.invalid && email?.touched) {
+                    <div class="field-error">
+                        @if (email?.errors?.['required']) {
+                        <span>{{ 'login.form.emailRequired' | translate }}</span>
+                        }
+                        @if (email?.errors?.['email']) {
+                        <span>{{ 'login.form.emailInvalid' | translate }}</span>
+                        }
+                    </div>
+                    }
+                </div>
+
+                <!-- Password Field -->
+                <div class="form-field">
+                    <label for="password" class="field-label">{{ 'login.form.passwordLabel' | translate }}</label>
+                    <div class="input-container">
+                        <i class="pi pi-lock input-icon"></i>
+                        <input id="password" type="password" formControlName="password"
+                            [placeholder]="'login.form.passwordPlaceholder' | translate" pInputText class="form-input  with-icon"
+                            [class.input-error]="password?.invalid && password?.touched" />
+                    </div>
+
+                    @if (password?.invalid && password?.touched) {
+                    <div class="field-error">
+                        @if (password?.errors?.['required']) {
+                        <span>{{ 'login.form.passwordRequired' | translate }}</span>
+                        }
+                        @if (password?.errors?.['minlength']) {
+                        <span>{{ 'login.form.passwordMinLength' | translate }}</span>
+                        }
+                    </div>
+                    }
+                </div>
+
+                <!-- Remember Me & Forgot Password -->
+                <div class="form-options">
+                    <div class="remember-me">
+                        <p-checkbox formControlName="rememberMe" inputId="rememberMe"
+                            styleClass="custom-checkbox"></p-checkbox>
+                        <label for="rememberMe" class="remember-label">{{ 'login.form.rememberMe' | translate }}</label>
+                    </div>
+
+                    <button type="button" class="forgot-password-link" (click)="onForgotPassword()">
+                        {{ 'login.form.forgotPassword' | translate }}
+                    </button>
+                </div>
+
+                <!-- Login Button -->
+                <button type="submit" pButton class="login-button" [disabled]="loginForm.invalid || isLoading"
+                    [loading]="isLoading">
+                    <i class="pi pi-sign-in"></i>
+                    <span>{{ 'login.form.loginButton' | translate }}</span>
+                </button>
+
+                <!-- Divider -->
+                <div class="divider-container">
+                    <div class="divider-line"></div>
+                    <span class="divider-text">{{ 'login.form.divider' | translate }}</span>
+                    <div class="divider-line"></div>
+                </div>
+
+                <!-- Google Login Button -->
+                <button type="button" pButton class="google-button" (click)="onGoogleLogin()">
+                    <i class="pi pi-google"></i>
+                    <span>{{ 'login.form.googleButton' | translate }}</span>
+                </button>
+
+                <!-- Create Account -->
+                <div class="create-account-section">
+                    <p class="create-account-text">{{ 'login.form.createAccount.text' | translate }}</p>
+                    <button type="button" pButton class="create-account-button" (click)="onCreateAccount()">
+                        <i class="pi pi-user-plus"></i>
+                        <span>{{ 'login.form.createAccount.button' | translate }}</span>
+                    </button>
+                </div>
+            </form>
+
+            <!-- Footer -->
+            <div class="login-footer">
+                <p class="copyright">
+                    {{ 'login.footer.copyright' | translate }}
+                    <a href="https://wiesoo.com" target="_blank" class="wiesoo-link">Wiesoo</a>
+                </p>
+                <p class="version">
+                    {{ 'login.footer.version' | translate }} 2.1.0 |
+                    <a href="#" class="footer-link">{{ 'login.footer.termsOfUse' | translate }}</a> |
+                    <a href="#" class="footer-link">{{ 'login.footer.privacy' | translate }}</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<p-toast />

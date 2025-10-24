@@ -1,0 +1,232 @@
+.p-menu {
+    &.p-menu-overlay {
+        background: var(--surface-card) !important;
+        border: 1px solid var(--surface-border) !important;
+        border-radius: var(--radius-md) !important;
+        box-shadow: var(--shadow-medium) !important;
+        padding: var(--space-xs) 0 !important;
+        min-width: 180px !important;
+        overflow: hidden !important;
+        margin-top: 4px !important;
+
+        // Lista de items
+        .p-menu-list {
+            padding: 0 !important;
+            margin: 0 !important;
+            list-style: none !important;
+
+            // Header "Ações"
+            .p-menu-submenu-label {
+                padding: 8px 20px 4px 20px !important;
+                margin: 0 !important;
+
+                span {
+                    color: var(--text-color-secondary) !important;
+                    font-size: 12px !important;
+                    font-weight: 600 !important;
+                    text-transform: uppercase !important;
+                    letter-spacing: 0.5px !important;
+                }
+            }
+
+            // Cada item do menu
+            .p-menu-item {
+                margin: 0 !important;
+
+                .p-menu-item-content {
+                    .p-menu-item-link {
+                        // Reset e base
+                        display: flex !important;
+                        align-items: center !important;
+                        padding: 12px 20px !important;
+                        margin: 0 !important;
+                        color: var(--text-color) !important;
+                        text-decoration: none !important;
+                        position: relative !important;
+                        background: transparent !important;
+                        border: none !important;
+                        border-radius: 0 !important;
+                        cursor: pointer !important;
+                        transition: all var(--duration-fast) var(--ease-smooth) !important;
+                        overflow: hidden !important;
+
+                        // Remove focus outline
+                        &:focus {
+                            outline: none !important;
+                            box-shadow: none !important;
+                        }
+
+                        // Barra lateral verde
+                        &::before {
+                            content: '';
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                            width: 3px;
+                            height: 100%;
+                            background: var(--primary-color);
+                            transform: translateX(-3px);
+                            transition: transform var(--duration-fast) var(--ease-smooth);
+                        }
+
+                        // HOVER - Efeito principal
+                        &:hover {
+                            background: var(--surface-ground) !important;
+                            color: var(--primary-color) !important;
+                            padding-left: 24px !important;
+
+                            &::before {
+                                transform: translateX(0);
+                            }
+
+                            .p-menu-item-icon {
+                                color: var(--primary-color) !important;
+                            }
+
+                            .p-menu-item-label {
+                                color: var(--primary-color) !important;
+                            }
+                        }
+
+                        // ACTIVE - Quando clica
+                        &:active {
+                            background: var(--primary-color) !important;
+                            color: white !important;
+
+                            .p-menu-item-icon,
+                            .p-menu-item-label {
+                                color: white !important;
+                            }
+                        }
+
+                        // Ícone
+                        .p-menu-item-icon {
+                            margin-right: 12px !important;
+                            font-size: 16px !important;
+                            width: 20px !important;
+                            color: var(--text-color-secondary) !important;
+                            transition: color var(--duration-fast) !important;
+                            flex-shrink: 0 !important;
+                        }
+
+                        // Texto do item
+                        .p-menu-item-label {
+                            font-size: 14px !important;
+                            font-weight: var(--weight-normal) !important;
+                            color: inherit !important;
+                            line-height: 1 !important;
+                        }
+
+                        // Remove ripple
+                        .p-ink {
+                            display: none !important;
+                        }
+                    }
+                }
+
+                // Item EXCLUIR - Estilo especial vermelho
+                &.menu-item-danger {
+                    .p-menu-item-content .p-menu-item-link {
+                        color: var(--error-color) !important;
+
+                        &::before {
+                            background: var(--error-color) !important;
+                        }
+
+                        &:hover {
+                            background: rgba(220, 53, 69, 0.1) !important;
+                            color: var(--error-color) !important;
+                            padding-left: 24px !important;
+
+                            .p-menu-item-icon,
+                            .p-menu-item-label {
+                                color: var(--error-color) !important;
+                            }
+                        }
+
+                        &:active {
+                            background: var(--error-color) !important;
+                            color: white !important;
+
+                            .p-menu-item-icon,
+                            .p-menu-item-label {
+                                color: white !important;
+                            }
+                        }
+
+                        .p-menu-item-icon {
+                            color: var(--error-color) !important;
+                        }
+                    }
+                }
+            }
+
+            // Separador
+            .p-menu-separator {
+                height: 1px !important;
+                background: var(--surface-border) !important;
+                margin: var(--space-xs) 0 !important;
+                padding: 0 !important;
+                border: none !important;
+            }
+        }
+    }
+}
+
+// Animações - também sem ::ng-deep
+.p-connected-overlay-enter-from {
+    opacity: 0 !important;
+    transform: translateY(-10px) scale(0.95) !important;
+}
+
+.p-connected-overlay-enter-active {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.p-connected-overlay-enter-to {
+    opacity: 1 !important;
+    transform: translateY(0) scale(1) !important;
+}
+
+.p-connected-overlay-leave-active {
+    transition: all 0.2s ease-in !important;
+}
+
+.p-connected-overlay-leave-to {
+    opacity: 0 !important;
+    transform: translateY(-5px) scale(0.95) !important;
+}
+
+// Animação alternativa
+@keyframes menuSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.p-menu.p-menu-overlay {
+    &.ng-animating {
+        animation: menuSlideIn var(--duration-normal) var(--ease-smooth);
+    }
+}
+
+// Responsividade
+@media (max-width: 768px) {
+    .p-menu.p-menu-overlay {
+        min-width: 200px !important;
+
+        .p-menu-list .p-menu-item .p-menu-item-content .p-menu-item-link {
+            padding: 14px 16px !important;
+
+            &:hover {
+                padding-left: 20px !important;
+            }
+        }
+    }
+}

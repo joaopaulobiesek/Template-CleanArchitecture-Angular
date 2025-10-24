@@ -1,0 +1,134 @@
+// Container principal
+.pagination-container {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+
+    .pagination-info {
+        font-size: var(--font-small) !important;
+        color: var(--text-color-secondary) !important;
+        flex: 0 0 auto !important;
+        white-space: nowrap !important;
+    }
+}
+
+// Paginator com flexbox simples
+.p-paginator {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+
+    // Flexbox ao invés de Grid
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: var(--space-sm) !important;
+    width: 100% !important;
+    position: relative !important;
+    padding-right: 160px !important; // Espaço para o dropdown
+
+    // Botões de navegação
+    .p-paginator-first,
+    .p-paginator-prev,
+    .p-paginator-next,
+    .p-paginator-last {
+        width: 40px !important;
+        height: 40px !important;
+        border: 2px solid var(--surface-border) !important;
+        background: var(--surface-card) !important;
+        border-radius: var(--radius-md) !important;
+        color: var(--text-color-secondary) !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        transition: all var(--duration-normal) var(--ease-smooth) !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        cursor: pointer !important;
+        flex-shrink: 0 !important; // Previne que encolham
+
+        &:hover:not(.p-disabled) {
+            border-color: var(--primary-color) !important;
+            color: var(--primary-color) !important;
+            transform: translateY(-2px) !important;
+            box-shadow: var(--shadow-soft) !important;
+        }
+
+        &.p-disabled {
+            opacity: 0.4 !important;
+            cursor: not-allowed !important;
+        }
+
+        // Garante que os ícones fiquem centralizados
+        i,
+        span {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+    }
+
+    // Container dos números de página
+    .p-paginator-pages {
+        display: flex !important;
+        gap: var(--space-xs) !important;
+        margin: 0 !important;
+
+        .p-paginator-page {
+            width: 40px !important;
+            height: 40px !important;
+            border: 2px solid var(--surface-border) !important;
+            background: var(--surface-card) !important;
+            border-radius: var(--radius-md) !important;
+            color: var(--text-color) !important;
+            font-weight: var(--weight-medium) !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            transition: all var(--duration-normal) var(--ease-smooth) !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            text-decoration: none !important;
+            flex-shrink: 0 !important;
+
+            &:hover {
+                border-color: var(--primary-color) !important;
+                color: var(--primary-color) !important;
+                transform: translateY(-2px) !important;
+                box-shadow: var(--shadow-soft) !important;
+            }
+
+            &.p-highlight,
+            &.p-paginator-page-selected,
+            &[aria-current="true"] {
+                background: var(--primary-color) !important;
+                border-color: var(--primary-color) !important;
+                color: white !important;
+                box-shadow: var(--shadow-green) !important;
+                transform: translateY(-1px) !important;
+
+                // Garante que o hover não sobrescreva
+                &:hover {
+                    background: var(--primary-color-hover) !important;
+                    border-color: var(--primary-color-hover) !important;
+                    color: white !important;
+                }
+            }
+        }
+    }
+
+    >.p-select {
+        position: absolute !important;
+        right: 0 !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        min-width: 150px !important;
+        max-width: 150px !important;
+
+        .p-component {
+            left: 0% !important;
+        }
+    }
+}

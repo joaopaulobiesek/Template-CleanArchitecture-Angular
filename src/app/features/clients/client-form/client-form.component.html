@@ -1,0 +1,230 @@
+<!-- ========================================
+     WRAPPER PRINCIPAL
+     ======================================== -->
+<div class="app-container">
+
+  <!-- ========================================
+       PAGE HEADER
+       ======================================== -->
+  <div class="page-header">
+    <div class="header-content">
+      <i class="pi pi-briefcase header-icon"></i>
+      <div class="header-text">
+        <h1 class="page-title">
+          {{ isEditMode() ? ('clients.form.editTitle' | translate) : ('clients.form.createTitle' | translate) }}
+        </h1>
+        <p class="page-subtitle">
+          {{ isEditMode() ? ('clients.form.editSubtitle' | translate) : ('clients.form.createSubtitle' | translate) }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================
+       FORM CARD
+       ======================================== -->
+  <div class="content-card">
+    <div class="card-body">
+
+      <!-- ========================================
+           FORMULÁRIO
+           ======================================== -->
+      <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+
+        <!-- ========================================
+             SEÇÃO: Informações Pessoais
+             ======================================== -->
+        <div class="form-section">
+          <h3 class="form-section-title">
+            <i class="pi pi-user"></i>
+            {{ 'clients.form.personalInfo' | translate }}
+          </h3>
+
+          <div class="form-grid">
+            <!-- Campo: Nome Completo -->
+            <div class="form-field col-12">
+              <label for="fullName" class="form-label">
+                {{ 'clients.fields.fullName' | translate }} <span class="required">*</span>
+              </label>
+              <input
+                id="fullName"
+                type="text"
+                pInputText
+                formControlName="fullName"
+                [placeholder]="'clients.form.fullNamePlaceholder' | translate"
+                [class.ng-invalid]="hasError('fullName', 'required')"
+                [class.ng-dirty]="fullName?.dirty" />
+
+              @if (hasError('fullName', 'required')) {
+                <small class="form-error">{{ 'clients.form.fullNameRequired' | translate }}</small>
+              }
+              @if (hasError('fullName', 'minlength')) {
+                <small class="form-error">{{ 'clients.form.fullNameMinLength' | translate }}</small>
+              }
+            </div>
+
+            <!-- Campo: CPF/CNPJ -->
+            <div class="form-field col-6">
+              <label for="documentNumber" class="form-label">
+                {{ 'clients.fields.documentNumber' | translate }} <span class="required">*</span>
+              </label>
+              <p-inputMask
+                id="documentNumber"
+                formControlName="documentNumber"
+                mask="999.999.999-99"
+                [placeholder]="'clients.form.documentPlaceholder' | translate"
+                [class.ng-invalid]="hasError('documentNumber', 'required')"
+                [class.ng-dirty]="documentNumber?.dirty">
+              </p-inputMask>
+
+              @if (hasError('documentNumber', 'required')) {
+                <small class="form-error">{{ 'clients.form.documentRequired' | translate }}</small>
+              }
+              @if (isEditMode()) {
+                <small class="form-hint">
+                  <i class="pi pi-info-circle"></i>
+                  {{ 'clients.form.documentCannotChange' | translate }}
+                </small>
+              }
+            </div>
+
+            <!-- Campo: Email -->
+            <div class="form-field col-6">
+              <label for="email" class="form-label">
+                {{ 'clients.fields.email' | translate }} <span class="required">*</span>
+              </label>
+              <input
+                id="email"
+                type="email"
+                pInputText
+                formControlName="email"
+                [placeholder]="'clients.form.emailPlaceholder' | translate"
+                [class.ng-invalid]="hasError('email', 'required') || hasError('email', 'email')"
+                [class.ng-dirty]="email?.dirty" />
+
+              @if (hasError('email', 'required')) {
+                <small class="form-error">{{ 'clients.form.emailRequired' | translate }}</small>
+              }
+              @if (hasError('email', 'email')) {
+                <small class="form-error">{{ 'clients.form.emailInvalid' | translate }}</small>
+              }
+            </div>
+          </div>
+        </div>
+
+        <!-- ========================================
+             SEÇÃO: Contato e Endereço
+             ======================================== -->
+        <div class="form-section">
+          <h3 class="form-section-title">
+            <i class="pi pi-phone"></i>
+            {{ 'clients.form.contactAddress' | translate }}
+          </h3>
+
+          <div class="form-grid">
+            <!-- Campo: Telefone -->
+            <div class="form-field col-6">
+              <label for="phone" class="form-label">
+                {{ 'clients.fields.phone' | translate }} <span class="required">*</span>
+              </label>
+              <p-inputMask
+                id="phone"
+                formControlName="phone"
+                mask="(99) 99999-9999"
+                [placeholder]="'clients.form.phonePlaceholder' | translate"
+                [class.ng-invalid]="hasError('phone', 'required')"
+                [class.ng-dirty]="phone?.dirty">
+              </p-inputMask>
+
+              @if (hasError('phone', 'required')) {
+                <small class="form-error">{{ 'clients.form.phoneRequired' | translate }}</small>
+              }
+            </div>
+
+            <!-- Campo: CEP -->
+            <div class="form-field col-6">
+              <label for="zipCode" class="form-label">
+                {{ 'clients.fields.zipCode' | translate }} <span class="required">*</span>
+              </label>
+              <p-inputMask
+                id="zipCode"
+                formControlName="zipCode"
+                mask="99999-999"
+                [placeholder]="'clients.form.zipCodePlaceholder' | translate"
+                [class.ng-invalid]="hasError('zipCode', 'required')"
+                [class.ng-dirty]="zipCode?.dirty">
+              </p-inputMask>
+
+              @if (hasError('zipCode', 'required')) {
+                <small class="form-error">{{ 'clients.form.zipCodeRequired' | translate }}</small>
+              }
+            </div>
+          </div>
+        </div>
+
+        <!-- ========================================
+             SEÇÃO: Status de Pagamento
+             ======================================== -->
+        <div class="form-section">
+          <h3 class="form-section-title">
+            <i class="pi pi-dollar"></i>
+            {{ 'clients.form.paymentStatus' | translate }}
+          </h3>
+
+          <div class="form-grid">
+            <!-- Campo: Pago -->
+            <div class="form-field col-12">
+              <div class="checkbox-field">
+                <p-checkbox
+                  inputId="paid"
+                  formControlName="paid"
+                  [binary]="true">
+                </p-checkbox>
+                <label for="paid" class="checkbox-label">
+                  {{ 'clients.form.paymentInDay' | translate }}
+                </label>
+              </div>
+              <small class="form-hint">
+                <i class="pi pi-info-circle"></i>
+                {{ 'clients.form.paymentHint' | translate }}
+              </small>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========================================
+             BOTÕES DE AÇÃO
+             ======================================== -->
+        <div class="form-actions">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="onCancel()"
+            [disabled]="loading()">
+            <i class="pi pi-times"></i>
+            <span>{{ 'clients.form.cancel' | translate }}</span>
+          </button>
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="loading() || clientForm.invalid">
+            @if (loading()) {
+              <i class="pi pi-spinner pi-spin"></i>
+            } @else {
+              <i class="pi pi-check"></i>
+            }
+            <span>{{ isEditMode() ? ('clients.form.update' | translate) : ('clients.form.save' | translate) }}</span>
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<!-- ========================================
+     PRIMENG TOAST
+     ======================================== -->
+<p-toast position="bottom-center" key="bc"></p-toast>

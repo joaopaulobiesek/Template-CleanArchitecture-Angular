@@ -1,0 +1,381 @@
+// ========================================
+// 📝 PRIME FORMS - Estilos Globais
+// Baseado em: prompt_IA.md
+// ========================================
+
+// ========================================
+// FORM SECTIONS (Seções do Formulário)
+// ========================================
+.form-section {
+  background: var(--surface-card) !important;
+  border-radius: var(--radius-lg, 16px) !important;
+  padding: var(--space-xl, 28px) !important;
+  margin-bottom: var(--space-lg, 24px) !important;
+  box-shadow: var(--shadow-soft, 0 2px 12px rgba(0, 0, 0, 0.08)) !important;
+  border: 1px solid var(--surface-border, #e5e5e5) !important;
+  transition: all var(--duration-normal, 0.3s) var(--ease-smooth, cubic-bezier(0.4, 0, 0.2, 1)) !important;
+
+  &:hover {
+    box-shadow: var(--shadow-medium, 0 4px 20px rgba(0, 0, 0, 0.12)) !important;
+  }
+}
+
+// Section Title com Ícone
+.form-section-title {
+  display: flex !important;
+  align-items: center !important;
+  gap: var(--space-sm, 12px) !important;
+  font-size: var(--font-h3, 15px) !important;
+  font-weight: 600 !important;
+  color: var(--text-color, #1a1a1a) !important;
+  margin-bottom: var(--space-lg, 24px) !important;
+  padding-bottom: var(--space-md, 16px) !important;
+  border-bottom: 2px solid var(--surface-border, #e5e5e5) !important;
+
+  i {
+    color: var(--primary-color, #6BB800) !important;
+    font-size: 18px !important;
+  }
+}
+
+// ========================================
+// FORM GRID (Layout em Grid)
+// ========================================
+.form-grid {
+  display: grid !important;
+  grid-template-columns: repeat(12, 1fr) !important;
+  gap: var(--space-lg, 24px) !important;
+  width: 100% !important;
+}
+
+// ========================================
+// FORM FIELD (Campo Individual)
+// ========================================
+.form-field {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: var(--space-sm, 8px) !important;
+
+  // Tamanhos de colunas
+  &.col-12 { grid-column: span 12 !important; }
+  &.col-6 { grid-column: span 6 !important; }
+  &.col-4 { grid-column: span 4 !important; }
+  &.col-3 { grid-column: span 3 !important; }
+
+  @media (max-width: 768px) {
+    &.col-6,
+    &.col-4,
+    &.col-3 {
+      grid-column: span 12 !important;
+    }
+  }
+}
+
+// ========================================
+// FORM LABELS
+// ========================================
+.form-label {
+  font-size: var(--font-body, 14px) !important;
+  font-weight: 600 !important;
+  color: var(--text-color-secondary, #555555) !important;
+  margin-bottom: var(--space-xs, 4px) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: var(--space-xs, 4px) !important;
+
+  .required {
+    color: var(--error-color, #dc3545) !important;
+    font-weight: 700 !important;
+  }
+}
+
+// ========================================
+// INPUTS (PrimeNG Input Text)
+// ========================================
+.p-inputtext,
+input[pInputText] {
+  width: 100% !important;
+  height: 48px !important;
+  padding: 14px 16px !important;
+  font-size: var(--font-body, 14px) !important;
+  font-weight: 500 !important;
+  color: var(--text-color, #1a1a1a) !important;
+  background: var(--surface-card, #ffffff) !important;
+  border: 2px solid var(--surface-border, #e5e5e5) !important;
+  border-radius: var(--radius-md, 12px) !important;
+  transition: all var(--duration-normal, 0.3s) var(--ease-smooth, cubic-bezier(0.4, 0, 0.2, 1)) !important;
+  box-shadow: none !important;
+
+  &::placeholder {
+    color: var(--text-color-light, #888888) !important;
+    opacity: 0.7 !important;
+  }
+
+  &:hover {
+    border-color: var(--primary-color-hover, #5A9A00) !important;
+  }
+
+  &:focus {
+    border-color: var(--primary-color, #6BB800) !important;
+    box-shadow: 0 0 0 3px rgba(107, 184, 0, 0.1) !important;
+    outline: none !important;
+  }
+
+  &.ng-invalid.ng-dirty,
+  &.ng-invalid.ng-touched {
+    border-color: var(--error-color, #dc3545) !important;
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1) !important;
+    }
+  }
+
+  &:disabled {
+    background: var(--surface-ground, #f5f7fa) !important;
+    color: var(--text-color-light, #888888) !important;
+    cursor: not-allowed !important;
+    opacity: 0.6 !important;
+  }
+}
+
+// ========================================
+// INPUT MASK (PrimeNG InputMask)
+// ========================================
+.p-inputmask {
+  width: 100% !important;
+
+  input {
+    width: 100% !important;
+    height: 48px !important;
+    padding: 14px 16px !important;
+    font-size: var(--font-body, 14px) !important;
+    font-weight: 500 !important;
+    color: var(--text-color, #1a1a1a) !important;
+    background: var(--surface-card, #ffffff) !important;
+    border: 2px solid var(--surface-border, #e5e5e5) !important;
+    border-radius: var(--radius-md, 12px) !important;
+    transition: all var(--duration-normal, 0.3s) var(--ease-smooth, cubic-bezier(0.4, 0, 0.2, 1)) !important;
+
+    &:hover {
+      border-color: var(--primary-color-hover, #5A9A00) !important;
+    }
+
+    &:focus {
+      border-color: var(--primary-color, #6BB800) !important;
+      box-shadow: 0 0 0 3px rgba(107, 184, 0, 0.1) !important;
+      outline: none !important;
+    }
+
+    &.ng-invalid.ng-dirty,
+    &.ng-invalid.ng-touched {
+      border-color: var(--error-color, #dc3545) !important;
+    }
+
+    &:disabled {
+      background: var(--surface-ground, #f5f7fa) !important;
+      cursor: not-allowed !important;
+      opacity: 0.6 !important;
+    }
+  }
+}
+
+// ========================================
+// CHECKBOX (PrimeNG Checkbox)
+// ========================================
+.checkbox-field {
+  display: flex !important;
+  align-items: center !important;
+  gap: var(--space-md, 12px) !important;
+  padding: var(--space-md, 16px) !important;
+  background: var(--surface-ground, #f5f7fa) !important;
+  border-radius: var(--radius-md, 12px) !important;
+  border: 2px solid var(--surface-border, #e5e5e5) !important;
+  transition: all var(--duration-fast, 0.2s) var(--ease-smooth, cubic-bezier(0.4, 0, 0.2, 1)) !important;
+  cursor: pointer !important;
+
+  &:hover {
+    border-color: var(--primary-color, #6BB800) !important;
+    background: var(--surface-card, #ffffff) !important;
+  }
+}
+
+.checkbox-label {
+  font-size: var(--font-body, 14px) !important;
+  font-weight: 500 !important;
+  color: var(--text-color, #1a1a1a) !important;
+  cursor: pointer !important;
+  user-select: none !important;
+  margin-bottom: 0 !important;
+}
+
+.p-checkbox {
+  .p-checkbox-box {
+    width: 22px !important;
+    height: 22px !important;
+    border: 2px solid var(--surface-border, #e5e5e5) !important;
+    border-radius: 6px !important;
+    background: var(--surface-card, #ffffff) !important;
+    transition: all var(--duration-fast, 0.2s) var(--ease-smooth, cubic-bezier(0.4, 0, 0.2, 1)) !important;
+
+    &:hover {
+      border-color: var(--primary-color, #6BB800) !important;
+    }
+
+    &.p-highlight {
+      background: var(--primary-color, #6BB800) !important;
+      border-color: var(--primary-color, #6BB800) !important;
+
+      .p-checkbox-icon {
+        color: white !important;
+        font-size: 14px !important;
+      }
+    }
+
+    &.p-focus {
+      box-shadow: 0 0 0 3px rgba(107, 184, 0, 0.1) !important;
+    }
+  }
+}
+
+// ========================================
+// FORM VALIDATION MESSAGES
+// ========================================
+.form-error {
+  display: block !important;
+  font-size: var(--font-small, 13px) !important;
+  font-weight: 500 !important;
+  color: var(--error-color, #dc3545) !important;
+  margin-top: var(--space-xs, 4px) !important;
+  animation: slideDown 0.2s ease !important;
+}
+
+.form-hint {
+  display: flex !important;
+  align-items: center !important;
+  gap: var(--space-xs, 6px) !important;
+  font-size: var(--font-small, 13px) !important;
+  font-weight: 500 !important;
+  color: var(--text-color-light, #888888) !important;
+  margin-top: var(--space-xs, 4px) !important;
+
+  i {
+    font-size: 12px !important;
+  }
+}
+
+// ========================================
+// FORM ACTIONS (Botões no Footer)
+// ========================================
+.form-actions {
+  display: flex !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+  gap: var(--space-md, 16px) !important;
+  padding-top: var(--space-xl, 32px) !important;
+  margin-top: var(--space-xl, 32px) !important;
+  border-top: 2px solid var(--surface-border, #e5e5e5) !important;
+
+  @media (max-width: 768px) {
+    flex-direction: column !important;
+
+    button {
+      width: 100% !important;
+    }
+  }
+}
+
+// ========================================
+// BOTÕES
+// ========================================
+.btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: var(--space-sm, 8px) !important;
+  padding: 12px 28px !important;
+  font-size: var(--font-body, 14px) !important;
+  font-weight: 600 !important;
+  border-radius: var(--radius-sm, 8px) !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: all var(--duration-normal, 0.3s) var(--ease-smooth, cubic-bezier(0.4, 0, 0.2, 1)) !important;
+  white-space: nowrap !important;
+  height: 48px !important;
+
+  i {
+    font-size: 16px !important;
+  }
+
+  &:disabled {
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+  }
+}
+
+// Botão Primário (Verde)
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-color, #6BB800), var(--primary-color-hover, #5A9A00)) !important;
+  color: white !important;
+  box-shadow: 0 4px 16px rgba(107, 184, 0, 0.3) !important;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(107, 184, 0, 0.4) !important;
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0) !important;
+    box-shadow: 0 2px 8px rgba(107, 184, 0, 0.3) !important;
+  }
+}
+
+// Botão Secundário (Branco com borda)
+.btn-secondary {
+  background: var(--surface-card, #ffffff) !important;
+  color: var(--text-color, #1a1a1a) !important;
+  border: 2px solid var(--surface-border, #e5e5e5) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+
+  &:hover:not(:disabled) {
+    border-color: var(--text-color-secondary, #555555) !important;
+    background: var(--surface-ground, #f5f7fa) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12) !important;
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0) !important;
+  }
+}
+
+// ========================================
+// ANIMAÇÕES
+// ========================================
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ========================================
+// RESPONSIVIDADE
+// ========================================
+@media (max-width: 768px) {
+  .form-section {
+    padding: var(--space-lg, 20px) !important;
+  }
+
+  .form-grid {
+    gap: var(--space-md, 16px) !important;
+  }
+
+  .form-section-title {
+    font-size: 14px !important;
+  }
+}

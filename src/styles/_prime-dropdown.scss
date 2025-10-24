@@ -1,0 +1,365 @@
+// ===== PRIME DROPDOWN STYLES - GLOBAL =====
+// Arquivo: _prime-dropdown.scss
+// Importar em styles.scss: @import 'prime-dropdown';
+
+// Container do dropdown customizado
+.dropdown-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+// Label do dropdown
+label {
+    font-weight: 600;
+    color: var(--text-color-secondary);
+    font-size: 14px;
+    margin-bottom: 0;
+    font-family: var(--font-family);
+}
+
+// Container do input com ícone
+.dropdown-input-container {
+    position: relative;
+    width: 100%;
+}
+
+// Ícone dentro do dropdown
+.dropdown-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-color-secondary);
+    font-size: 14px;
+    pointer-events: none;
+    z-index: 10;
+}
+
+// ===== PRIMENG P-SELECT STYLES (SEM ::ng-deep para global) =====
+
+// Select principal
+.p-select {
+    width: 100% !important;
+    height: 48px !important;
+    border: 2px solid var(--surface-border-medium) !important;
+    border-radius: var(--radius-md) !important;
+    background: var(--surface-card) !important;
+    transition: all var(--duration-fast) var(--ease-smooth) !important;
+
+    &:hover:not(.p-disabled) {
+        border-color: var(--primary-color) !important;
+    }
+
+    &.p-focus {
+        border-color: var(--primary-color) !important;
+        box-shadow: 0 0 0 3px rgba(107, 184, 0, 0.1) !important;
+        outline: none !important;
+    }
+
+    &.p-disabled {
+        background: var(--surface-ground) !important;
+        border-color: var(--surface-border) !important;
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+}
+
+// Label do select
+.p-select-label {
+    padding: 14px 48px 14px 46px !important;
+    font-size: var(--font-body) !important;
+    color: var(--text-color) !important;
+    display: flex !important;
+    align-items: center !important;
+    line-height: 1.4 !important;
+    font-family: var(--font-family);
+
+    &.p-placeholder {
+        color: var(--text-color-light) !important;
+        font-style: italic !important;
+    }
+}
+
+// Dropdown trigger (seta)
+.p-select-dropdown {
+    width: 48px !important;
+    color: var(--text-color-secondary) !important;
+    background: transparent !important;
+    border: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: color var(--duration-fast) var(--ease-smooth) !important;
+
+    &:hover {
+        color: var(--text-color) !important;
+    }
+
+    .p-icon {
+        transition: transform var(--duration-fast) var(--ease-smooth) !important;
+    }
+}
+
+// Rotação da seta quando aberto
+.p-select.p-select-open .p-select-dropdown .p-icon {
+    transform: rotate(180deg) !important;
+}
+
+// ===== OVERLAY/PANEL DO SELECT =====
+
+// Container do overlay
+.p-select-overlay {
+    background: var(--surface-card) !important;
+    border: 1px solid var(--surface-border) !important;
+    border-radius: var(--radius-md) !important;
+    box-shadow: var(--shadow-medium) !important;
+    margin-top: 4px !important;
+    padding: var(--space-sm) 0 !important;
+    overflow: hidden !important;
+}
+
+// Lista de opções
+.p-select-list {
+    padding: 0 !important;
+    margin: 0 !important;
+    background: var(--surface-card) !important;
+    max-height: 300px !important;
+    overflow-y: auto !important;
+
+    // Scrollbar customizada
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: var(--surface-ground);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--surface-border-medium);
+        border-radius: 3px;
+
+        &:hover {
+            background: var(--text-color-light);
+        }
+    }
+}
+
+// Cada opção
+.p-select-option {
+    padding: var(--space-md) !important;
+    background: var(--surface-card) !important;
+    color: var(--text-color) !important;
+    font-size: var(--font-body) !important;
+    cursor: pointer !important;
+    transition: all var(--duration-fast) var(--ease-smooth) !important;
+    line-height: 1.5 !important;
+    border: none !important;
+    font-family: var(--font-family);
+    position: relative !important;
+
+    // Barra lateral no hover (como no menu)
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 3px;
+        height: 100%;
+        background: var(--primary-color);
+        transform: translateX(-3px);
+        transition: transform var(--duration-fast) var(--ease-smooth);
+    }
+
+    &:hover {
+        background: var(--surface-ground) !important;
+        color: var(--primary-color) !important;
+        padding-left: calc(var(--space-md) + var(--space-xs)) !important;
+
+        &::before {
+            transform: translateX(0);
+        }
+    }
+
+    &.p-select-option-selected {
+        background: var(--primary-color) !important;
+        color: white !important;
+        font-weight: var(--weight-medium) !important;
+
+        &::before {
+            transform: translateX(0);
+            background: white !important;
+        }
+    }
+
+    &.p-disabled {
+        color: var(--text-color-light) !important;
+        cursor: not-allowed !important;
+        background: transparent !important;
+        opacity: 0.6;
+    }
+}
+
+// Item wrapper
+.p-selectitem {
+    padding: 0 !important;
+    background: transparent !important;
+    display: block !important;
+    width: 100% !important;
+}
+
+// Hover para li
+li[role="option"] {
+    &:hover {
+        background: var(--surface-ground) !important;
+
+        .p-selectitem {
+            color: var(--primary-color) !important;
+        }
+    }
+}
+
+// Mensagem vazia
+.p-select-empty-message {
+    padding: var(--space-md) !important;
+    color: var(--text-color-light) !important;
+    text-align: center !important;
+    font-size: var(--font-body) !important;
+    font-style: italic !important;
+    background: var(--surface-card) !important;
+}
+
+// ===== FILTER INPUT (quando filter está habilitado) =====
+
+.p-select-filter-container {
+    padding: var(--space-sm) !important;
+    border-bottom: 1px solid var(--surface-border) !important;
+    background: var(--surface-ground) !important;
+
+    .p-select-filter {
+        width: 100% !important;
+        padding: var(--space-sm) var(--space-md) !important;
+        border: 2px solid var(--surface-border) !important;
+        border-radius: var(--radius-sm) !important;
+        font-size: var(--font-body) !important;
+        background: var(--surface-card) !important;
+        color: var(--text-color) !important;
+        transition: all var(--duration-fast) var(--ease-smooth) !important;
+
+        &:focus {
+            border-color: var(--primary-color) !important;
+            outline: none !important;
+            box-shadow: 0 0 0 2px rgba(107, 184, 0, 0.1) !important;
+        }
+
+        &::placeholder {
+            color: var(--text-color-light) !important;
+            font-style: italic !important;
+        }
+    }
+}
+
+// Clear button (quando showClear está habilitado)
+.p-select-clear-icon {
+    color: var(--text-color-light) !important;
+    right: 56px !important;
+    transition: color var(--duration-fast) !important;
+
+    &:hover {
+        color: var(--text-color-secondary) !important;
+    }
+}
+
+// ===== ANIMAÇÕES =====
+
+// Animação de entrada do overlay
+@keyframes selectSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.p-connected-overlay-enter-from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+}
+
+.p-connected-overlay-enter-active {
+    transition: all var(--duration-normal) var(--ease-smooth);
+}
+
+.p-connected-overlay-enter-to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+// ===== ESTADOS DE VALIDAÇÃO =====
+
+// Para usar com Angular Forms
+.ng-invalid.ng-touched {
+
+    .p-select {
+        border-color: var(--error-color) !important;
+
+        &.p-focus {
+            box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1) !important;
+        }
+    }
+}
+
+.ng-valid.ng-touched {
+
+    .p-select{
+        border-color: var(--success-color) !important;
+    }
+}
+
+// ===== RESPONSIVIDADE =====
+
+@media (max-width: 768px) {
+
+    .p-select,
+    .p-cascadeselect {
+        height: 44px !important;
+        min-height: 44px !important;
+    }
+
+    .p-select-label {
+        padding: 12px 44px 12px 42px !important;
+        font-size: var(--font-body) !important;
+    }
+
+    .p-select-dropdown {
+        width: 44px !important;
+    }
+
+    .dropdown-icon {
+        left: 14px;
+        font-size: 12px;
+    }
+
+    .p-select-option {
+        padding: 14px !important;
+        font-size: var(--font-body) !important;
+    }
+}
+
+// ===== ACESSIBILIDADE =====
+
+.p-select:focus-visible {
+    outline: 2px solid var(--primary-color) !important;
+    outline-offset: 2px !important;
+}
+
+.p-select-option:focus-visible {
+    outline: 2px solid var(--primary-color) !important;
+    outline-offset: -2px !important;
+}

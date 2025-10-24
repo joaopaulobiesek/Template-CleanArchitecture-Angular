@@ -1,0 +1,174 @@
+<!-- ========================================
+     WRAPPER PRINCIPAL
+     ======================================== -->
+<div class="dashboard-container">
+
+  <!-- ========================================
+       PAGE HEADER
+       ======================================== -->
+  <div class="page-header">
+    <div class="header-content">
+      <i class="pi pi-chart-line header-icon"></i>
+      <div class="header-text">
+        <h1 class="page-title">{{ 'dashboard.title' | translate }}</h1>
+        <p class="page-subtitle">{{ 'dashboard.description' | translate }}</p>
+      </div>
+    </div>
+  </div>
+
+  @if (loading()) {
+    <!-- ========================================
+         LOADING STATE
+         ======================================== -->
+    <div class="loading-grid">
+      @for (i of [1,2,3,4]; track i) {
+        <div class="stat-card-skeleton">
+          <p-skeleton width="100%" height="120px"></p-skeleton>
+        </div>
+      }
+    </div>
+  } @else {
+
+    <!-- ========================================
+         STATS CARDS
+         ======================================== -->
+    <div class="stats-grid">
+      @for (card of statsCards(); track card.title) {
+        <div class="stat-card">
+          <div class="stat-icon" [ngClass]="card.iconClass">
+            <i class="pi" [ngClass]="card.icon"></i>
+          </div>
+          <div class="stat-content">
+            <div class="stat-value">{{ card.value }}</div>
+            <div class="stat-label">{{ card.title | translate }}</div>
+            <div class="stat-change" [ngClass]="card.change >= 0 ? 'positive' : 'negative'">
+              <i class="pi" [ngClass]="card.change >= 0 ? 'pi-arrow-up' : 'pi-arrow-down'"></i>
+              <span>{{ card.change >= 0 ? '+' : '' }}{{ card.change }}%</span>
+              <span class="change-label">{{ 'dashboard.stats.vsLastMonth' | translate }}</span>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- ========================================
+         CHARTS ROW
+         ======================================== -->
+    <div class="charts-row">
+      <!-- Sales Chart -->
+      <div class="chart-card">
+        <div class="chart-header">
+          <h3>{{ 'dashboard.charts.salesOverview' | translate }}</h3>
+          <p class="chart-subtitle">{{ 'dashboard.charts.monthlySales' | translate }}</p>
+        </div>
+        <div class="chart-body">
+          @if (salesChartData()) {
+            <p-chart
+              type="line"
+              [data]="salesChartData()"
+              [options]="chartOptions()"
+              [style]="{ height: '300px' }">
+            </p-chart>
+          }
+        </div>
+      </div>
+
+      <!-- Categories Chart -->
+      <div class="chart-card">
+        <div class="chart-header">
+          <h3>{{ 'dashboard.charts.productCategories' | translate }}</h3>
+          <p class="chart-subtitle">{{ 'dashboard.charts.productCategories' | translate }}</p>
+        </div>
+        <div class="chart-body">
+          @if (categoriesChartData()) {
+            <p-chart
+              type="doughnut"
+              [data]="categoriesChartData()"
+              [style]="{ height: '300px' }">
+            </p-chart>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================
+         TABLES ROW
+         ======================================== -->
+    <div class="tables-row">
+
+      <!-- Recent Orders Table -->
+      <div class="table-card">
+        <div class="table-header">
+          <h3>{{ 'dashboard.recentOrders.title' | translate }}</h3>
+          <button class="btn btn-text">
+            {{ 'dashboard.recentOrders.viewAll' | translate }}
+            <i class="pi pi-arrow-right"></i>
+          </button>
+        </div>
+        <div class="table-body">
+          <p-table [value]="recentOrders()" [tableStyle]="{ 'min-width': '100%' }">
+            <ng-template pTemplate="header">
+              <tr>
+                <th>{{ 'dashboard.recentOrders.order' | translate }}</th>
+                <th>{{ 'dashboard.recentOrders.client' | translate }}</th>
+                <th>{{ 'dashboard.recentOrders.date' | translate }}</th>
+                <th>{{ 'dashboard.recentOrders.total' | translate }}</th>
+                <th>{{ 'dashboard.recentOrders.status' | translate }}</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-order>
+              <tr>
+                <td><strong>{{ order.id }}</strong></td>
+                <td>{{ order.client }}</td>
+                <td>{{ order.date }}</td>
+                <td><strong>{{ formatCurrency(order.total) }}</strong></td>
+                <td>
+                  <span [class]="getStatusClass(order.status)">
+                    <i class="pi" [ngClass]="getStatusIcon(order.status)"></i>
+                    {{ 'dashboard.status.' + order.status | translate }}
+                  </span>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+
+      <!-- Recent Activity -->
+      <div class="activity-card">
+        <div class="activity-header">
+          <h3>{{ 'dashboard.recentActivity.title' | translate }}</h3>
+          <button class="btn btn-text">
+            {{ 'dashboard.recentActivity.viewAll' | translate }}
+            <i class="pi pi-arrow-right"></i>
+          </button>
+        </div>
+        <div class="activity-body">
+          @if (recentActivities().length > 0) {
+            <div class="activity-list">
+              @for (activity of recentActivities(); track activity.description) {
+                <div class="activity-item">
+                  <div class="activity-icon" [ngClass]="activity.iconClass">
+                    <i class="pi" [ngClass]="activity.icon"></i>
+                  </div>
+                  <div class="activity-content">
+                    <p class="activity-description">{{ activity.description }}</p>
+                    <span class="activity-time">{{ activity.time }}</span>
+                  </div>
+                </div>
+              }
+            </div>
+          } @else {
+            <div class="empty-state">
+              <i class="pi pi-inbox empty-icon"></i>
+              <p>{{ 'dashboard.recentActivity.noActivity' | translate }}</p>
+            </div>
+          }
+        </div>
+      </div>
+
+    </div>
+
+  }
+
+</div>

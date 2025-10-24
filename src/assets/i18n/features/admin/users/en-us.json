@@ -1,0 +1,78 @@
+{
+  "users": {
+    "title": "User Management",
+    "description": "Manage users, permissions and system access",
+    "noData": "No users found",
+    "emptyMessage": "There are no users matching the selected filters.",
+    "createFirst": "Create First User",
+    "totalCount": "Total of {count} users",
+    "search": "Search users...",
+    "availableRoles": "Available Roles",
+    "viewPermissions": "View Permissions",
+    "noRoles": "No roles assigned",
+    "noPolicies": "No policies assigned",
+    "userId": "ID:",
+    "fields": {
+      "name": "Name",
+      "fullName": "Full Name",
+      "email": "Email",
+      "phone": "Phone",
+      "role": "Role",
+      "roles": "Roles",
+      "permissions": "Permissions",
+      "actions": "Actions",
+      "policies": "Policies",
+      "password": "Password",
+      "status": "Status",
+      "createdAt": "Created at",
+      "updatedAt": "Updated at"
+    },
+    "form": {
+      "createTitle": "New User",
+      "addUser": "Add User",
+      "editTitle": "Edit User",
+      "viewPermissionsTitle": "User Permissions",
+      "fillRequired": "Please fill all required fields",
+      "createSuccess": "User created successfully!",
+      "updateSuccess": "User updated successfully!",
+      "deleteSuccess": "User deleted successfully!",
+      "createError": "Failed to create user",
+      "updateError": "Failed to update user",
+      "deleteError": "Failed to delete user",
+      "fullNamePlaceholder": "Ex: John Doe",
+      "emailPlaceholder": "email@example.com",
+      "passwordPlaceholder": "Enter password",
+      "phonePlaceholder": "(11) 99999-9999",
+      "selectPolicies": "Select policies",
+      "selectRoles": "Select roles",
+      "searchPolicies": "Search policies...",
+      "searchRoles": "Search roles...",
+      "cancel": "Cancel",
+      "save": "Save",
+      "close": "Close",
+      "rolesLabel": "Roles",
+      "policiesLabel": "Policies",
+      "policiesCount": "Policies ({count})"
+    },
+    "stats": {
+      "total": "Total Users",
+      "thisPage": "On This Page"
+    },
+    "errors": {
+      "title": "Error loading users",
+      "message": "An error occurred while fetching users. Please try again.",
+      "code": "Code:",
+      "tryAgain": "Try Again"
+    },
+    "loading": {
+      "title": "Loading users...",
+      "message": "Please wait while we fetch the information"
+    },
+    "pagination": {
+      "showing": "Showing",
+      "to": "to",
+      "of": "of",
+      "items": "users"
+    }
+  }
+}

@@ -1,0 +1,99 @@
+trigger:
+- main
+- dev
+- release/*
+
+stages:
+  - stage: Dev
+    variables:
+      buildConfiguration: 'development'
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/dev')
+    displayName: 'Deploy - DEV'
+    jobs:
+      - job: Deploy_Dev
+        pool:
+          vmImage: ubuntu-latest
+        steps:
+        - task: NodeTool@0
+          inputs:
+            versionSpec: '20.x'
+          displayName: 'Instalar Node.js'
+        
+        - script: |
+            npm ci
+            npx ng build --configuration $(buildConfiguration)
+            # Copiar package.json atualizado para build
+            cp package.json dist/Template-Angular-MultiTenancy/
+          displayName: 'Build Angular'
+        
+        - task: ArchiveFiles@2
+          inputs:
+            rootFolderOrFile: 'dist/Template-Angular-MultiTenancy'
+            includeRootFolder: false
+            archiveType: 'zip'
+            archiveFile: '$(Build.ArtifactStagingDirectory)/app.zip'
+          displayName: 'Archive files'
+        
+        - task: PublishBuildArtifacts@1
+          inputs:
+            PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+            ArtifactName: 'drop'
+            publishLocation: 'Container'
+          displayName: 'Publish artifacts'
+        
+        - task: AzureWebApp@1
+          inputs:
+            azureSubscription: '000'
+            appType: 'webAppLinux'
+            appName: '000'
+            package: '$(Build.ArtifactStagingDirectory)/app.zip'
+            runtimeStack: 'NODE|20-lts'
+            startUpCommand: 'npm start'
+          displayName: 'Deploy para DEV'
+
+  - stage: Prod
+    variables:
+      buildConfiguration: 'production'
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
+    displayName: 'Deploy - PROD'
+    jobs:
+      - job: Deploy_Prod
+        pool:
+          vmImage: ubuntu-latest
+        steps:
+        - task: NodeTool@0
+          inputs:
+            versionSpec: '20.x'
+          displayName: 'Instalar Node.js'
+        
+        - script: |
+            npm ci
+            npx ng build --configuration $(buildConfiguration)
+            # Copiar package.json atualizado para build
+            cp package.json dist/Template-Angular-MultiTenancy/
+          displayName: 'Build Angular'
+        
+        - task: ArchiveFiles@2
+          inputs:
+            rootFolderOrFile: 'dist/Template-Angular-MultiTenancy'
+            includeRootFolder: false
+            archiveType: 'zip'
+            archiveFile: '$(Build.ArtifactStagingDirectory)/app.zip'
+          displayName: 'Archive files'
+        
+        - task: PublishBuildArtifacts@1
+          inputs:
+            PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+            ArtifactName: 'drop'
+            publishLocation: 'Container'
+          displayName: 'Publish artifacts'
+        
+        - task: AzureWebApp@1
+          inputs:
+            azureSubscription: '000'
+            appType: 'webAppLinux'
+            appName: '000'
+            package: '$(Build.ArtifactStagingDirectory)/app.zip'
+            runtimeStack: 'NODE|20-lts'
+            startUpCommand: 'npm start'
+          displayName: 'Deploy para PROD'

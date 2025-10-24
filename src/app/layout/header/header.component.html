@@ -1,0 +1,42 @@
+<div class="main-header">
+    <div class="header-left">
+        <!-- ✅ Botão Hamburger (só aparece quando sidebar FECHADO) -->
+        @if (!sidebarOpen()) {
+        <button class="hamburger-btn" (click)="onToggleSidebar()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        }
+
+        <div class="page-breadcrumb">
+            <i class="pi pi-home"></i>
+            <span class="breadcrumb-separator">/</span>
+            <span>{{ 'header.admin' | translate }}</span>
+            <span class="breadcrumb-separator">/</span>
+            <span class="current-page">{{ breadcrumbs()[breadcrumbs().length - 1].label || ('menu.dashboard' | translate) }}</span>
+        </div>
+    </div>
+
+    <div class="header-right">
+        <div class="date-info">
+            <span class="date-label">{{ currentDate().split(',')[0] }},</span>
+            <span class="date-value">{{ currentDate().split(',')[1] ? currentDate().split(',')[1].trim() : '' }}</span>
+        </div>
+
+        <!-- Language Selector -->
+        <app-language-selector></app-language-selector>
+
+        <div class="profile-section">
+            <div class="profile-avatar">{{ getUserInitials() }}</div>
+            <div class="profile-info">
+                <span class="profile-greeting">{{ 'common.greeting' | translate }}, {{ getUserFirstName() }}!</span>
+                <span class="profile-name">{{ getDisplayName() }}</span>
+            </div>
+            <div class="farm-show-badge">
+                <i class="pi pi-desktop"></i>
+                {{ 'header.template' | translate }}
+            </div>
+        </div>
+    </div>
+</div>

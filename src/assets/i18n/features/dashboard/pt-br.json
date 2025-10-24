@@ -1,0 +1,73 @@
+{
+  "dashboard": {
+    "title": "Dashboard",
+    "description": "Visão geral do sistema e principais métricas",
+    "welcome": "Bem-vindo de volta!",
+    "lastUpdate": "Última atualização",
+    "stats": {
+      "totalSales": "Vendas Totais",
+      "totalClients": "Total de Clientes",
+      "totalOrders": "Pedidos",
+      "totalRevenue": "Receita Total",
+      "vsLastMonth": "vs. mês anterior",
+      "increase": "aumento",
+      "decrease": "diminuição"
+    },
+    "charts": {
+      "salesOverview": "Visão Geral de Vendas",
+      "monthlySales": "Vendas Mensais (Últimos 6 Meses)",
+      "productCategories": "Distribuição por Categoria",
+      "revenue": "Receita",
+      "orders": "Pedidos"
+    },
+    "recentOrders": {
+      "title": "Pedidos Recentes",
+      "viewAll": "Ver Todos",
+      "order": "Pedido",
+      "client": "Cliente",
+      "date": "Data",
+      "total": "Total",
+      "status": "Status",
+      "noOrders": "Nenhum pedido encontrado"
+    },
+    "recentActivity": {
+      "title": "Atividade Recente",
+      "viewAll": "Ver Todas",
+      "noActivity": "Nenhuma atividade recente"
+    },
+    "topProducts": {
+      "title": "Produtos Mais Vendidos",
+      "product": "Produto",
+      "sales": "Vendas",
+      "revenue": "Receita"
+    },
+    "status": {
+      "pending": "Pendente",
+      "processing": "Processando",
+      "completed": "Concluído",
+      "cancelled": "Cancelado",
+      "delivered": "Entregue"
+    },
+    "categories": {
+      "electronics": "Eletrônicos",
+      "clothing": "Roupas",
+      "food": "Alimentos",
+      "books": "Livros",
+      "toys": "Brinquedos"
+    },
+    "months": {
+      "jan": "Jan",
+      "feb": "Fev",
+      "mar": "Mar",
+      "apr": "Abr",
+      "may": "Mai",
+      "jun": "Jun",
+      "jul": "Jul",
+      "aug": "Ago",
+      "sep": "Set",
+      "oct": "Out",
+      "nov": "Nov",
+      "dec": "Dez"
+    }
+  }
+}

@@ -1,0 +1,380 @@
+// ===== PRIME TOAST STYLES - DESIGN MODERNO =====
+// Arquivo: _prime-toast.scss
+// Importar em styles.scss: @import 'prime-toast';
+
+// Container principal do Toast
+.p-toast {
+
+    // Ajuste de posicionamento
+    &.p-toast-top-right {
+        top: 20px !important;
+        right: 20px !important;
+    }
+
+    &.p-toast-top-left {
+        top: 20px !important;
+        left: 20px !important;
+    }
+
+    &.p-toast-top-center {
+        top: 20px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+    }
+
+    &.p-toast-bottom-center {
+        bottom: 20px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+    }
+
+    // Mensagem individual
+    .p-toast-message {
+        background: var(--surface-card) !important;
+        border-radius: var(--radius-md) !important;
+        box-shadow: var(--shadow-strong) !important;
+        border: none !important;
+        padding: var(--space-md) !important;
+        margin-bottom: var(--space-md) !important;
+        min-width: 320px !important;
+        max-width: 400px !important;
+        position: relative !important;
+        overflow: hidden !important;
+
+        // Barra lateral colorida
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--primary-color);
+        }
+
+        // Container do conteúdo
+        .p-toast-message-content {
+            display: flex !important;
+            align-items: flex-start !important;
+            gap: var(--space-md) !important;
+            padding: 0 !important;
+        }
+
+        // Ícone principal
+        .p-toast-message-icon {
+            font-size: 24px !important;
+            flex-shrink: 0 !important;
+            margin-top: 2px !important;
+        }
+
+        // Conteúdo de texto
+        .p-toast-message-text {
+            flex: 1 !important;
+
+            .p-toast-summary {
+                font-weight: var(--weight-bold) !important;
+                font-size: var(--font-body) !important;
+                color: var(--text-color) !important;
+                margin: 0 0 var(--space-xs) 0 !important;
+                line-height: 1.4 !important;
+            }
+
+            .p-toast-detail {
+                font-size: var(--font-small) !important;
+                color: var(--text-color-secondary) !important;
+                line-height: 1.5 !important;
+                margin: 0 !important;
+            }
+        }
+
+        // Botão de fechar
+        .p-toast-icon-close {
+            position: absolute !important;
+            top: var(--space-sm) !important;
+            right: var(--space-sm) !important;
+            width: 24px !important;
+            height: 24px !important;
+            background: transparent !important;
+            border: none !important;
+            color: var(--text-color-light) !important;
+            opacity: 0.6 !important;
+            transition: all var(--duration-fast) var(--ease-smooth) !important;
+            cursor: pointer !important;
+            border-radius: var(--radius-sm) !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+
+            &:hover {
+                opacity: 1 !important;
+                background: var(--surface-ground) !important;
+                color: var(--text-color) !important;
+            }
+
+            // Ícone X do PrimeIcons
+            .p-toast-icon-close-icon {
+                font-size: 14px !important;
+            }
+        }
+
+        // === VARIAÇÕES POR TIPO ===
+
+        // SUCCESS
+        &.p-toast-message-success {
+            &::before {
+                background: var(--success-color) !important;
+            }
+
+            .p-toast-message-icon {
+                color: var(--success-color) !important;
+
+                &::before {
+                    content: '\e9a1'; // pi-check-circle
+                    font-family: 'primeicons' !important;
+                }
+            }
+        }
+
+        // ERROR
+        &.p-toast-message-error {
+            &::before {
+                background: var(--error-color) !important;
+            }
+
+            .p-toast-message-icon {
+                color: var(--error-color) !important;
+
+                &::before {
+                    content: '\e982'; // pi-times-circle
+                    font-family: 'primeicons' !important;
+                }
+            }
+        }
+
+        // WARNING
+        &.p-toast-message-warn {
+            &::before {
+                background: var(--warning-color) !important;
+            }
+
+            .p-toast-message-icon {
+                color: var(--warning-color) !important;
+
+                &::before {
+                    content: '\e923'; // pi-exclamation-triangle
+                    font-family: 'primeicons' !important;
+                }
+            }
+        }
+
+        // INFO
+        &.p-toast-message-info {
+            &::before {
+                background: var(--info-color) !important;
+            }
+
+            .p-toast-message-icon {
+                color: var(--info-color) !important;
+
+                &::before {
+                    content: '\e924'; // pi-info-circle
+                    font-family: 'primeicons' !important;
+                }
+            }
+        }
+
+        // CUSTOM (genérico)
+        &.p-toast-message-custom {
+            &::before {
+                background: var(--primary-color) !important;
+            }
+
+            .p-toast-message-icon {
+                color: var(--primary-color) !important;
+            }
+        }
+    }
+}
+
+// === ANIMAÇÕES ===
+
+// Entrada do toast
+@keyframes toastSlideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+// Saída do toast
+@keyframes toastSlideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+// Aplicar animações
+.p-toast-message-enter {
+    animation: toastSlideIn 0.3s ease-out !important;
+}
+
+.p-toast-message-leave {
+    animation: toastSlideOut 0.3s ease-in !important;
+}
+
+// Para posição top-center e bottom-center
+.p-toast-top-center,
+.p-toast-bottom-center {
+    .p-toast-message-enter {
+        animation: toastFadeIn 0.3s ease-out !important;
+    }
+
+    .p-toast-message-leave {
+        animation: toastFadeOut 0.3s ease-in !important;
+    }
+}
+
+@keyframes toastFadeIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes toastFadeOut {
+    from {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    to {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+}
+
+// === PROGRESS BAR (opcional) ===
+.p-toast-message {
+
+    // Barra de progresso na parte inferior
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 3px;
+        background: rgba(0, 0, 0, 0.1);
+        animation: toastProgress 5s linear;
+        transform-origin: left;
+    }
+
+    &.p-toast-message-success::after {
+        background: var(--success-color);
+        opacity: 0.3;
+    }
+
+    &.p-toast-message-error::after {
+        background: var(--error-color);
+        opacity: 0.3;
+    }
+
+    &.p-toast-message-warn::after {
+        background: var(--warning-color);
+        opacity: 0.3;
+    }
+
+    &.p-toast-message-info::after {
+        background: var(--info-color);
+        opacity: 0.3;
+    }
+}
+
+@keyframes toastProgress {
+    from {
+        transform: scaleX(1);
+    }
+
+    to {
+        transform: scaleX(0);
+    }
+}
+
+// === RESPONSIVIDADE ===
+@media (max-width: 768px) {
+    .p-toast {
+
+        &.p-toast-top-right,
+        &.p-toast-top-left {
+            top: 10px !important;
+            left: 10px !important;
+            right: 10px !important;
+        }
+
+        .p-toast-message {
+            min-width: unset !important;
+            max-width: unset !important;
+            width: 100% !important;
+        }
+    }
+}
+
+// === MODO ESCURO (opcional) ===
+@media (prefers-color-scheme: dark) {
+    .p-toast-message {
+        background: #2a2a2a !important;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
+
+        .p-toast-summary {
+            color: #f0f0f0 !important;
+        }
+
+        .p-toast-detail {
+            color: #b0b0b0 !important;
+        }
+
+        .p-toast-icon-close {
+            color: #888 !important;
+
+            &:hover {
+                background: #3a3a3a !important;
+                color: #f0f0f0 !important;
+            }
+        }
+    }
+}
+
+// === ACESSIBILIDADE ===
+.p-toast-message {
+
+    // Garantir contraste adequado
+    @media (prefers-contrast: high) {
+        border: 2px solid currentColor !important;
+    }
+
+    // Suporte para leitores de tela
+    &[role="alert"] {
+        // Mantém as propriedades ARIA
+    }
+
+    // Focus visible
+    &:focus-visible {
+        outline: 2px solid var(--primary-color) !important;
+        outline-offset: 2px !important;
+    }
+}

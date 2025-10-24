@@ -1,0 +1,323 @@
+<!-- ========================================
+     WRAPPER PRINCIPAL
+     ======================================== -->
+<div class="app-container">
+
+  <!-- ========================================
+       PAGE HEADER
+       ======================================== -->
+  <div class="page-header">
+    <div class="header-content">
+      <i class="pi pi-briefcase header-icon"></i>
+      <div class="header-text">
+        <h1 class="page-title">{{ 'clients.title' | translate }}</h1>
+        <p class="page-subtitle">{{ 'clients.description' | translate }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================
+       STATS CARDS
+       ======================================== -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon green">
+        <i class="pi pi-users"></i>
+      </div>
+      <div class="stat-content">
+        <div class="stat-value">{{ totalItems }}</div>
+        <div class="stat-label">{{ 'clients.totalCount' | translate: { count: totalItems } }}</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon yellow">
+        <i class="pi pi-check-circle"></i>
+      </div>
+      <div class="stat-content">
+        <div class="stat-value">-</div>
+        <div class="stat-label">{{ 'clients.status.active' | translate }}</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon red">
+        <i class="pi pi-dollar"></i>
+      </div>
+      <div class="stat-content">
+        <div class="stat-value">-</div>
+        <div class="stat-label">{{ 'clients.fields.paid' | translate }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================
+       MAIN CONTENT CARD
+       ======================================== -->
+  <div class="content-card">
+
+    <!-- ========================================
+         MAIN TOOLBAR (Busca + Botões)
+         ======================================== -->
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <div class="search-container">
+          <app-search-debounce
+            [placeholder]="'clients.search' | translate"
+            (onSearchChange)="search($event)">
+          </app-search-debounce>
+        </div>
+      </div>
+
+      <div class="toolbar-right">
+        <button class="btn btn-primary" [routerLink]="['/', translationService.getCurrentLanguage(), 'clients', 'new']">
+          <i class="pi pi-plus"></i>
+          <span>{{ 'clients.form.createTitle' | translate }}</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ========================================
+         TABLE CONTAINER
+         ⚠️ LÓGICA CRÍTICA SSR:
+         @if (!loading() && isBrowser) → Mostra tabela
+         @else → Mostra loading
+         ======================================== -->
+    <div class="card-body">
+
+      <!-- ========================================
+           TABELA (Quando carregou dados)
+           ======================================== -->
+      @if (!loading() && isBrowser) {
+
+        <p-table
+          [value]="data()?.data!"
+          [customSort]="true"
+          (sortFunction)="customSort($event)">
+
+          <!-- ========================================
+               HEADER DA TABELA
+               ======================================== -->
+          <ng-template pTemplate="header">
+            <tr>
+              <!-- Coluna: Nome -->
+              <th pSortableColumn="fullName" class="sortable-column">
+                <div class="column-header">
+                  <span>{{ 'clients.fields.fullName' | translate }}</span>
+                  <p-sortIcon field="fullName"></p-sortIcon>
+                </div>
+              </th>
+
+              <!-- Coluna: Documento -->
+              <th pSortableColumn="documentNumber" class="sortable-column hide-mobile">
+                <div class="column-header">
+                  <span>{{ 'clients.fields.documentNumber' | translate }}</span>
+                  <p-sortIcon field="documentNumber"></p-sortIcon>
+                </div>
+              </th>
+
+              <!-- Coluna: Telefone -->
+              <th class="hide-mobile">
+                <div class="column-header">
+                  <span>{{ 'clients.fields.phone' | translate }}</span>
+                </div>
+              </th>
+
+              <!-- Coluna: CEP -->
+              <th class="hide-mobile">
+                <div class="column-header">
+                  <span>{{ 'clients.fields.zipCode' | translate }}</span>
+                </div>
+              </th>
+
+              <!-- Coluna: Status Pagamento -->
+              <th pSortableColumn="paid" class="sortable-column">
+                <div class="column-header">
+                  <span>{{ 'clients.fields.status' | translate }}</span>
+                  <p-sortIcon field="paid"></p-sortIcon>
+                </div>
+              </th>
+
+              <!-- Coluna: Ações -->
+              <th class="actions-column">
+                <button class="action-btn" (click)="openHeaderMenu($event)">
+                  <i class="pi pi-ellipsis-v"></i>
+                </button>
+              </th>
+            </tr>
+          </ng-template>
+
+          <!-- ========================================
+               BODY DA TABELA
+               ======================================== -->
+          <ng-template pTemplate="body" let-client>
+            <tr>
+              <!-- Cell: Nome -->
+              <td>
+                <div class="item-info">
+                  <div class="item-icon">
+                    <i class="pi pi-user"></i>
+                  </div>
+                  <div class="item-details">
+                    <h4 class="item-title">{{ client.fullName }}</h4>
+                    <p class="item-subtitle">{{ client.email || ('clients.noEmail' | translate) }}</p>
+                  </div>
+                </div>
+              </td>
+
+              <!-- Cell: Documento -->
+              <td class="hide-mobile">
+                <span class="description-text">{{ formatDocument(client.documentNumber) }}</span>
+              </td>
+
+              <!-- Cell: Telefone -->
+              <td class="hide-mobile">
+                <span class="description-text">{{ formatPhone(client.phone) }}</span>
+              </td>
+
+              <!-- Cell: CEP -->
+              <td class="hide-mobile">
+                <span class="description-text">{{ formatZipCode(client.zipCode) }}</span>
+              </td>
+
+              <!-- Cell: Status Pagamento -->
+              <td>
+                <span
+                  class="status-badge"
+                  [ngClass]="getStatusBadge(client.paid).class">
+                  <i class="pi" [ngClass]="client.paid ? 'pi-check-circle' : 'pi-clock'"></i>
+                  {{ getStatusBadge(client.paid).label }}
+                </span>
+              </td>
+
+              <!-- Cell: Ações -->
+              <td class="actions-column">
+                <button class="action-btn" (click)="openMenu(client, $event)">
+                  <i class="pi pi-ellipsis-v"></i>
+                </button>
+              </td>
+            </tr>
+          </ng-template>
+
+          <!-- ========================================
+               EMPTY STATE (Quando não há dados)
+               ======================================== -->
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="6" class="empty-state-row">
+                <div class="empty-state-content">
+                  <i class="pi pi-inbox empty-icon"></i>
+                  <h3 class="empty-title">{{ 'clients.noData' | translate }}</h3>
+                  <p class="empty-message">
+                    {{ 'clients.description' | translate }}
+                  </p>
+                  <button class="btn btn-primary" [routerLink]="['/', translationService.getCurrentLanguage(), 'clients', 'new']">
+                    <i class="pi pi-plus"></i>
+                    {{ 'clients.form.createTitle' | translate }}
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </ng-template>
+
+        </p-table>
+
+        <!-- ========================================
+             PAGINATION
+             ⚠️ FORA DA <p-table>!
+             ======================================== -->
+        @if (data()) {
+          <div class="pagination-container">
+            <div class="pagination-info">
+              {{ 'common.showing' | translate }}
+              <strong class="info-highlight">{{ (currentPage - 1) * numberOfRows + 1 }}</strong>
+              {{ 'common.to' | translate }}
+              <strong class="info-highlight">{{ min(currentPage * numberOfRows, totalItems) }}</strong>
+              {{ 'common.of' | translate }}
+              <strong class="info-highlight">{{ totalItems }}</strong>
+              {{ 'menu.clients' | translate }}
+            </div>
+            <p-paginator
+              [first]="(currentPage - 1) * numberOfRows"
+              (onPageChange)="onPageChange($event)"
+              [rows]="numberOfRows"
+              [totalRecords]="totalItems"
+              [rowsPerPageOptions]="rowsPerPageOptions">
+            </p-paginator>
+          </div>
+        }
+
+      } @else {
+
+        <!-- ========================================
+             LOADING STATE (Quando está carregando)
+             ======================================== -->
+        <div class="loading-container">
+          <div class="loading-header">
+            <div class="loading-spinner">
+              <i class="pi pi-spinner pi-spin"></i>
+            </div>
+            <h3 class="loading-title">{{ 'common.loading' | translate }}</h3>
+            <p class="loading-message">{{ 'common.pleaseWait' | translate }}</p>
+          </div>
+
+          <!-- Shimmer Effect -->
+          <div class="shimmer-container">
+            <div class="shimmer-header shimmer"></div>
+            @for (i of [1,2,3,4,5]; track i) {
+              <div class="shimmer-row">
+                <div class="shimmer-cell shimmer" style="width: 25%"></div>
+                <div class="shimmer-cell shimmer" style="width: 20%"></div>
+                <div class="shimmer-cell shimmer" style="width: 20%"></div>
+                <div class="shimmer-cell shimmer" style="width: 15%"></div>
+                <div class="shimmer-cell shimmer" style="width: 15%"></div>
+                <div class="shimmer-cell shimmer" style="width: 5%"></div>
+              </div>
+            }
+          </div>
+        </div>
+
+      }
+    </div>
+  </div>
+</div>
+
+<!-- ========================================
+     ERROR STATE (Fora do container principal)
+     ⚠️ Só aparece se error() for true
+     ======================================== -->
+@if (error()) {
+  <div class="content-card">
+    <div class="error-container">
+      <div class="error-icon">
+        <i class="pi pi-exclamation-triangle"></i>
+      </div>
+      <h3 class="error-title">{{ 'clients.errors.title' | translate }}</h3>
+      <p class="error-message">
+        {{ error()?.message || ('clients.errors.message' | translate) }}
+      </p>
+      @if (error()?.status) {
+        <div class="error-details">
+          <span>{{ 'clients.errors.code' | translate }} {{ error()?.status }}</span>
+          <span class="detail-separator">•</span>
+          <span>{{ error()?.statusText }}</span>
+        </div>
+      }
+      <button class="btn btn-primary" (click)="search()">
+        <i class="pi pi-refresh"></i>
+        {{ 'clients.errors.tryAgain' | translate }}
+      </button>
+    </div>
+  </div>
+}
+
+<!-- ========================================
+     PRIMENG COMPONENTS (Final do HTML)
+     ⚠️ SEMPRE incluir no final
+     ======================================== -->
+<p-toast position="bottom-center" key="bc"></p-toast>
+<p-menu #menu [popup]="true" [model]="items"></p-menu>
+<p-menu #menuHeader [popup]="true" [model]="itemsHeader"></p-menu>
+<p-confirmDialog
+  [style]="{width: '500px'}"
+  acceptButtonStyleClass="btn btn-primary"
+  rejectButtonStyleClass="btn btn-secondary">
+</p-confirmDialog>

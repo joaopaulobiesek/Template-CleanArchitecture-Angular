@@ -1,0 +1,47 @@
+// ===== P-DIALOG =====
+.p-dialog {
+    background: var(--surface-card) !important;
+    border-radius: var(--radius-lg) !important;
+    box-shadow: var(--shadow-strong) !important;
+    border: 1px solid var(--surface-border) !important;
+
+    .p-dialog-header {
+        background: linear-gradient(135deg, #fafbff 0%, #f5f8ff 100%) !important;
+        padding: var(--space-lg) !important;
+        border-bottom: 2px solid var(--surface-border) !important;
+        border-radius: var(--radius-lg) var(--radius-lg) 0 0 !important;
+
+        .p-dialog-title {
+            font-size: var(--font-h2) !important;
+            font-weight: var(--weight-medium) !important;
+            color: var(--text-color) !important;
+        }
+
+        .p-dialog-header-icon {
+            color: var(--text-color-secondary) !important;
+            transition: all var(--duration-normal) var(--ease-smooth) !important;
+            width: 32px !important;
+            height: 32px !important;
+            border-radius: var(--radius-sm) !important;
+
+            &:hover {
+                color: var(--primary-color) !important;
+                background: rgba(107, 184, 0, 0.1) !important;
+            }
+        }
+    }
+
+    .p-dialog-content {
+        padding: var(--space-lg) !important;
+        color: var(--text-color) !important;
+    }
+
+    .p-dialog-footer {
+        padding: var(--space-lg) !important;
+        border-top: 1px solid var(--surface-border) !important;
+        display: flex !important;
+        justify-content: flex-end !important;
+        gap: var(--space-md) !important;
+        background: rgba(0, 0, 0, 0.01) !important;
+    }
+}

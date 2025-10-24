@@ -1,0 +1,10 @@
+<!-- search-debounce.component.html -->
+<form [formGroup]="searchTextFg" class="search-container">
+    <label for="search" [class.sr-only]="hideLabel">{{ label || 'Pesquisar' }}</label>
+    <div class="search-input-container">
+        <i class="fas fa-search search-icon"></i>
+        <input name="search" id="search" type="text" pInputText [placeholder]="placeholder || 'Pesquisar...'"
+            formControlName="searchedText" [attr.aria-label]="ariaLabel || label || 'Campo de pesquisa'"
+            (blur)="onBlurHandler()" (focus)="onFocusHandler()" />
+    </div>
+</form>

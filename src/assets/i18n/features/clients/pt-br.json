@@ -1,0 +1,71 @@
+{
+  "clients": {
+    "title": "Clientes",
+    "description": "Gerenciamento de clientes do sistema",
+    "noData": "Nenhum cliente encontrado",
+    "totalCount": "Total de {count} clientes",
+    "search": "Buscar clientes...",
+    "noEmail": "Sem e-mail",
+    "fields": {
+      "fullName": "Nome Completo",
+      "email": "E-mail",
+      "phone": "Telefone",
+      "documentNumber": "CPF",
+      "zipCode": "CEP",
+      "paid": "Pago",
+      "status": "Status",
+      "createdAt": "Criado em",
+      "updatedAt": "Atualizado em"
+    },
+    "form": {
+      "createTitle": "Novo Cliente",
+      "editTitle": "Editar Cliente",
+      "fillRequired": "Por favor, preencha todos os campos obrigatórios",
+      "createSuccess": "Cliente cadastrado com sucesso!",
+      "updateSuccess": "Cliente atualizado com sucesso!",
+      "deleteSuccess": "Cliente excluído com sucesso!",
+      "createError": "Falha ao cadastrar cliente",
+      "updateError": "Falha ao atualizar cliente",
+      "deleteError": "Falha ao excluir cliente",
+      "confirmDelete": "Tem certeza que deseja excluir este cliente?",
+      "confirmDeleteMessage": "Esta ação não pode ser desfeita.",
+      "personalInfo": "Informações Pessoais",
+      "contactAddress": "Contato e Endereço",
+      "paymentStatus": "Status de Pagamento",
+      "paymentInDay": "Cliente com pagamento em dia",
+      "paymentHint": "Marque esta opção se o cliente está com os pagamentos em dia",
+      "cancel": "Cancelar",
+      "save": "Cadastrar",
+      "update": "Atualizar",
+      "createSubtitle": "Cadastre um novo cliente no sistema",
+      "editSubtitle": "Atualize as informações do cliente",
+      "fullNamePlaceholder": "Digite o nome completo do cliente",
+      "documentPlaceholder": "000.000.000-00",
+      "emailPlaceholder": "email@exemplo.com",
+      "phonePlaceholder": "(00) 00000-0000",
+      "zipCodePlaceholder": "00000-000",
+      "required": "obrigatório",
+      "fullNameRequired": "Nome completo é obrigatório",
+      "fullNameMinLength": "Nome deve ter no mínimo 3 caracteres",
+      "documentRequired": "CPF/CNPJ é obrigatório",
+      "documentCannotChange": "CPF/CNPJ não pode ser alterado",
+      "emailRequired": "E-mail é obrigatório",
+      "emailInvalid": "E-mail inválido",
+      "phoneRequired": "Telefone é obrigatório",
+      "zipCodeRequired": "CEP é obrigatório"
+    },
+    "status": {
+      "active": "Ativo",
+      "inactive": "Inativo",
+      "pending": "Pendente",
+      "paid": "Pago",
+      "unpaid": "Pendente"
+    },
+    "errors": {
+      "title": "Erro ao carregar clientes",
+      "message": "Ocorreu um erro ao buscar os clientes. Por favor, tente novamente.",
+      "code": "Código:",
+      "tryAgain": "Tentar Novamente"
+    }
+  }
+}

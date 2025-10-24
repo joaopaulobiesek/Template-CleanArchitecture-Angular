@@ -1,0 +1,366 @@
+// ========================================
+// USER COMPONENT STYLES
+// ========================================
+// ⚠️ A MAIORIA DOS ESTILOS JÁ EXISTE GLOBALMENTE
+// Apenas estilos específicos do componente aqui
+// ========================================
+
+// Botão de ver permissões (olho)
+.permissions-eye-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: var(--surface-card, #ffffff);
+  border: 2px solid var(--surface-border, #e5e5e5);
+  border-radius: var(--radius-sm, 8px);
+  color: var(--text-color-secondary, #555555);
+  cursor: pointer;
+  transition: all var(--duration-normal, 0.3s) var(--ease-smooth, cubic-bezier(0.4, 0, 0.2, 1));
+  font-size: 13px;
+  font-weight: 500;
+
+  &:hover {
+    border-color: var(--primary-color, #6bb800);
+    color: var(--primary-color, #6bb800);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-soft, 0 2px 12px rgba(0, 0, 0, 0.08));
+  }
+
+  i {
+    font-size: 14px;
+  }
+
+  .permissions-count {
+    background: var(--primary-color, #6bb800);
+    color: white;
+    border-radius: 12px;
+    padding: 2px 6px;
+    font-size: 11px;
+    font-weight: 600;
+    min-width: 18px;
+    text-align: center;
+  }
+
+  &:hover .permissions-count {
+    background: var(--primary-color-hover, #5a9a00);
+  }
+}
+
+// ========================================
+// MULTISELECT DROPDOWN (Fundo Branco)
+// ========================================
+// 🎯 Garante que o painel do multiselect tenha fundo branco e sem efeitos visuais
+::ng-deep body .policies-panel,
+body .policies-panel .p-multiselect-header,
+body .policies-panel .p-multiselect-items-wrapper,
+body .policies-panel .p-multiselect-items,
+body .policies-panel .p-multiselect-item,
+body .policies-panel .p-multiselect-item .p-multiselect-item-label {
+  background-color: #FFF !important;
+  background-image: none !important;
+  color: #111827 !important;
+  opacity: 1 !important;
+  mix-blend-mode: normal !important;
+  backdrop-filter: none !important;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15) !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 8px !important;
+}
+
+::ng-deep body .policies-panel {
+  background-color: var(--surface-0, #ffffff) !important;
+  padding: 2rem;
+}
+
+// Dialog header customizado
+::ng-deep .user-dialog,
+::ng-deep .permissions-dialog {
+  .p-dialog-header {
+    background: var(--surface-card, #ffffff);
+    border-bottom: 2px solid var(--surface-border, #e5e5e5);
+    padding: var(--space-lg, 24px);
+
+    .p-dialog-title {
+      font-size: var(--font-h2, 18px);
+      font-weight: 600;
+      color: var(--text-color, #1a1a1a);
+    }
+  }
+
+  .p-dialog-content {
+    padding: var(--space-lg, 24px);
+  }
+
+  .p-dialog-footer {
+    padding: var(--space-lg, 24px);
+    border-top: 2px solid var(--surface-border, #e5e5e5);
+    justify-content: flex-end;
+    gap: 12px;
+  }
+}
+
+// Header do dialog
+.dialog-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  i {
+    font-size: 24px;
+    color: var(--primary-color, #6bb800);
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-color, #1a1a1a);
+  }
+}
+
+// Form groups
+.form-group {
+  margin-bottom: 1.5rem;
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #374151;
+    font-size: 14px;
+  }
+
+  .w-100 {
+    width: 100%;
+  }
+}
+
+// Conteúdo do modal de permissões
+.permissions-dialog-content {
+  .user-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md, 16px);
+    padding-bottom: var(--space-lg, 24px);
+    border-bottom: 2px solid var(--surface-border, #e5e5e5);
+    margin-bottom: var(--space-lg, 24px);
+
+    .user-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-round, 50%);
+      background: linear-gradient(135deg, var(--primary-color, #6bb800), var(--primary-color-hover, #5a9a00));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .user-info {
+      flex: 1;
+
+      .user-name {
+        margin: 0 0 4px 0;
+        font-size: var(--font-h2, 18px);
+        font-weight: 600;
+        color: var(--text-color, #1a1a1a);
+      }
+
+      .user-email {
+        margin: 0;
+        color: var(--text-color-secondary, #555555);
+        font-size: var(--font-small, 13px);
+      }
+    }
+  }
+
+  .details-section {
+    margin-bottom: var(--space-lg, 24px);
+
+    .section-title {
+      margin: 0 0 var(--space-md, 16px) 0;
+      font-size: var(--font-h3, 15px);
+      font-weight: 600;
+      color: var(--text-color, #1a1a1a);
+    }
+
+    .detail-item {
+      .roles-container {
+        display: flex;
+        gap: var(--space-xs, 4px);
+        flex-wrap: wrap;
+
+        .role-badge {
+          background: var(--primary-color, #6bb800);
+          color: white;
+          padding: 4px 12px;
+          border-radius: var(--radius-sm, 8px);
+          font-size: var(--font-caption, 12px);
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  .policies-section {
+    background: var(--surface-ground, #f5f7fa);
+    border-radius: var(--radius-md, 12px);
+    padding: var(--space-lg, 24px);
+
+    .section-title {
+      margin: 0 0 var(--space-md, 16px) 0;
+      font-size: var(--font-h3, 15px);
+      font-weight: 600;
+      color: var(--text-color, #1a1a1a);
+    }
+
+    .policies-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      max-height: 300px;
+      overflow-y: auto;
+
+      .policy-item {
+        display: flex;
+        align-items: center;
+        gap: var(--space-sm, 8px);
+        padding: var(--space-sm, 8px) 0;
+        border-bottom: 1px solid var(--surface-border, #e5e5e5);
+        font-size: var(--font-small, 13px);
+        color: var(--text-color, #1a1a1a);
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        .policy-icon {
+          color: var(--success-color, #28a745);
+          font-size: 12px;
+          flex-shrink: 0;
+        }
+      }
+
+      // Custom Scrollbar
+      &::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: var(--surface-border, #e5e5e5);
+        border-radius: 3px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: var(--primary-color, #6bb800);
+        border-radius: 3px;
+
+        &:hover {
+          background: var(--primary-color-hover, #5a9a00);
+        }
+      }
+    }
+  }
+}
+
+// ========================================
+// RESPONSIVIDADE MOBILE
+// ========================================
+@media (max-width: 768px) {
+  // Ajusta padding dos dialogs em mobile
+  ::ng-deep .user-dialog,
+  ::ng-deep .permissions-dialog {
+    .p-dialog {
+      width: 95vw !important;
+      max-width: 95vw !important;
+    }
+
+    .p-dialog-header,
+    .p-dialog-content,
+    .p-dialog-footer {
+      padding: var(--space-md, 16px) !important;
+    }
+  }
+
+  // Form groups com menos espaço
+  .form-group {
+    margin-bottom: 1rem;
+
+    label {
+      font-size: 13px;
+    }
+  }
+
+  // Botões do footer em coluna
+  ::ng-deep .p-dialog-footer {
+    flex-direction: column;
+    gap: 8px !important;
+
+    button {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  // Dialog header menor
+  .dialog-header {
+    i {
+      font-size: 20px;
+    }
+
+    h3 {
+      font-size: 16px;
+    }
+  }
+
+  // Modal de permissões mais compacto
+  .permissions-dialog-content {
+    .user-header {
+      flex-direction: column;
+      text-align: center;
+
+      .user-avatar {
+        width: 48px;
+        height: 48px;
+        font-size: 18px;
+      }
+    }
+
+    .policies-section {
+      padding: var(--space-md, 16px);
+
+      .policies-list {
+        max-height: 200px;
+      }
+    }
+  }
+
+  // Botão de permissões menor
+  .permissions-eye-btn {
+    font-size: 12px;
+    padding: 6px 10px;
+
+    i {
+      font-size: 12px;
+    }
+
+    .permissions-count {
+      font-size: 10px;
+      padding: 1px 5px;
+    }
+  }
+}
+
+// Tablet (iPad, etc)
+@media (max-width: 1024px) and (min-width: 769px) {
+  ::ng-deep .user-dialog,
+  ::ng-deep .permissions-dialog {
+    .p-dialog {
+      width: 90vw !important;
+      max-width: 600px !important;
+    }
+  }
+}

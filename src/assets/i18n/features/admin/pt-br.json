@@ -1,0 +1,15 @@
+{
+  "admin": {
+    "title": "Administração",
+    "users": {
+      "title": "Usuários",
+      "description": "Gerenciamento de usuários do sistema",
+      "fields": {
+        "name": "Nome",
+        "email": "E-mail",
+        "role": "Função",
+        "status": "Status"
+      }
+    }
+  }
+}

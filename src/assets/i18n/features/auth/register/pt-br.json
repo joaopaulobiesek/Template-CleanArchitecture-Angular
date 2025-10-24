@@ -1,0 +1,59 @@
+{
+  "register": {
+    "brand": {
+      "title": "Template",
+      "subtitle": "MultiTenant Platform 2025",
+      "features": {
+        "financialManagement": "Gestão Financeira Inteligente",
+        "whatsappIntegration": "WhatsApp Integrado",
+        "realtimeReports": "Relatórios em tempo real",
+        "secureAccess": "Acesso seguro e confiável"
+      }
+    },
+    "welcome": {
+      "title": "Criar Conta",
+      "descriptionInvite": "Use seu código de convite para começar",
+      "descriptionFull": "Preencha seus dados para criar sua conta"
+    },
+    "form": {
+      "nameLabel": "Nome Completo",
+      "namePlaceholder": "Digite seu nome completo...",
+      "nameMinLength": "Nome deve ter pelo menos 3 caracteres",
+      "emailLabel": "E-mail",
+      "emailPlaceholder": "Digite seu e-mail...",
+      "emailInvalid": "Digite um e-mail válido",
+      "phoneLabel": "Telefone",
+      "phonePlaceholder": "Digite seu telefone...",
+      "phoneMinLength": "Telefone deve ter pelo menos 10 dígitos",
+      "passwordLabel": "Senha",
+      "passwordPlaceholder": "Digite sua senha...",
+      "passwordMinLength": "Senha deve ter pelo menos 6 caracteres",
+      "confirmPasswordLabel": "Confirmar Senha",
+      "confirmPasswordPlaceholder": "Confirme sua senha...",
+      "passwordMismatch": "As senhas não coincidem",
+      "acceptTerms": "Eu aceito os",
+      "termsOfUse": "Termos de Uso",
+      "and": "e a",
+      "privacy": "Política de Privacidade",
+      "requiredMark": "*",
+      "continueWithGoogle": "Continuar com Google",
+      "createAccountWithoutGoogle": "Criar Conta sem Google",
+      "createAccountButton": "Criar Conta",
+      "backButton": "Voltar",
+      "divider": "OU",
+      "footer": {
+        "hasAccount": "Já tem uma conta?",
+        "login": "Fazer login"
+      }
+    },
+    "messages": {
+      "acceptTermsRequired": "Você precisa aceitar os termos para continuar",
+      "inviteCodeRequired": "Digite um código de convite válido",
+      "inviteCodeInvalid": "Código de convite inválido",
+      "accountCreated": "Conta criada com sucesso!",
+      "loggingIn": "Fazendo login automaticamente...",
+      "errorCreatingAccount": "Erro ao criar conta",
+      "verifyData": "Verifique os dados e o código de convite"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+@use 'design-system';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+    height: 100%;
+}
+
+body {
+    font-family: var(--font-family);
+    font-size: var(--font-body);
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--surface-ground);
+    height: 100%;
+}
+
+// ✅ Garante que app-root ocupe 100% da altura
+app-root {
+    display: block;
+    min-height: 100vh;
+    height: 100%;
+}

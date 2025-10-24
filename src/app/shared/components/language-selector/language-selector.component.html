@@ -1,0 +1,25 @@
+<div class="language-selector">
+  <!-- Botão de toggle -->
+  <button
+    class="language-toggle"
+    (click)="toggleDropdown($event)"
+    [attr.aria-expanded]="isOpen()"
+    aria-label="Select language">
+    <span class="current-flag">{{ translationService.getCurrentLanguageConfig()?.flag }}</span>
+    <span class="current-label">{{ translationService.getCurrentLanguageConfig()?.label }}</span>
+    <span class="chevron" [class.open]="isOpen()">▼</span>
+  </button>
+
+  <!-- Dropdown -->
+  <div class="language-dropdown" [class.open]="isOpen()">
+    <button
+      *ngFor="let lang of languages"
+      class="language-option"
+      [class.active]="isCurrentLanguage(lang)"
+      (click)="selectLanguage(lang, $event)">
+      <span class="flag">{{ lang.flag }}</span>
+      <span class="label">{{ lang.label }}</span>
+      <span class="checkmark" *ngIf="isCurrentLanguage(lang)">✓</span>
+    </button>
+  </div>
+</div>

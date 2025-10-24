@@ -1,0 +1,73 @@
+{
+  "dashboard": {
+    "title": "Dashboard",
+    "description": "System overview and key metrics",
+    "welcome": "Welcome back!",
+    "lastUpdate": "Last update",
+    "stats": {
+      "totalSales": "Total Sales",
+      "totalClients": "Total Clients",
+      "totalOrders": "Orders",
+      "totalRevenue": "Total Revenue",
+      "vsLastMonth": "vs. last month",
+      "increase": "increase",
+      "decrease": "decrease"
+    },
+    "charts": {
+      "salesOverview": "Sales Overview",
+      "monthlySales": "Monthly Sales (Last 6 Months)",
+      "productCategories": "Distribution by Category",
+      "revenue": "Revenue",
+      "orders": "Orders"
+    },
+    "recentOrders": {
+      "title": "Recent Orders",
+      "viewAll": "View All",
+      "order": "Order",
+      "client": "Client",
+      "date": "Date",
+      "total": "Total",
+      "status": "Status",
+      "noOrders": "No orders found"
+    },
+    "recentActivity": {
+      "title": "Recent Activity",
+      "viewAll": "View All",
+      "noActivity": "No recent activity"
+    },
+    "topProducts": {
+      "title": "Top Selling Products",
+      "product": "Product",
+      "sales": "Sales",
+      "revenue": "Revenue"
+    },
+    "status": {
+      "pending": "Pending",
+      "processing": "Processing",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "delivered": "Delivered"
+    },
+    "categories": {
+      "electronics": "Electronics",
+      "clothing": "Clothing",
+      "food": "Food",
+      "books": "Books",
+      "toys": "Toys"
+    },
+    "months": {
+      "jan": "Jan",
+      "feb": "Feb",
+      "mar": "Mar",
+      "apr": "Apr",
+      "may": "May",
+      "jun": "Jun",
+      "jul": "Jul",
+      "aug": "Aug",
+      "sep": "Sep",
+      "oct": "Oct",
+      "nov": "Nov",
+      "dec": "Dec"
+    }
+  }
+}

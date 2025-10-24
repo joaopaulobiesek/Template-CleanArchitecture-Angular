@@ -1,0 +1,15 @@
+{
+  "admin": {
+    "title": "Administration",
+    "users": {
+      "title": "Users",
+      "description": "System user management",
+      "fields": {
+        "name": "Name",
+        "email": "Email",
+        "role": "Role",
+        "status": "Status"
+      }
+    }
+  }
+}

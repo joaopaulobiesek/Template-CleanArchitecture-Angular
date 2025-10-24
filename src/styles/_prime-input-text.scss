@@ -1,0 +1,26 @@
+// ===== P-INPUT =====
+.p-inputtext {
+    border: 2px solid var(--surface-border) !important;
+    border-radius: var(--radius-md) !important;
+    padding: 12px var(--space-md) !important;
+    font-size: var(--font-body) !important;
+    font-weight: var(--weight-medium) !important;
+    background: var(--surface-card) !important;
+    color: var(--text-color) !important;
+    transition: all var(--duration-normal) var(--ease-smooth) !important;
+
+    &:focus {
+        border-color: var(--primary-color) !important;
+        box-shadow: 0 0 0 3px rgba(107, 184, 0, 0.1) !important;
+        outline: none !important;
+    }
+
+    &::placeholder {
+        color: var(--text-color-light) !important;
+    }
+
+    &:disabled {
+        background: var(--surface-ground) !important;
+        color: var(--text-color-light) !important;
+    }
+}

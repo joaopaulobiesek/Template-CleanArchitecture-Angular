@@ -1,0 +1,76 @@
+{
+  "common": {
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "edit": "Editar",
+    "delete": "Excluir",
+    "search": "Pesquisar",
+    "actions": "Ações",
+    "yes": "Sim",
+    "no": "Não",
+    "loading": "Carregando...",
+    "warning": "Atenção",
+    "success": "Sucesso",
+    "error": "Erro",
+    "greeting": "Olá",
+    "back": "Voltar",
+    "new": "Novo",
+    "filter": "Filtrar",
+    "export": "Exportar",
+    "import": "Importar",
+    "refresh": "Atualizar",
+    "close": "Fechar",
+    "confirm": "Confirmar",
+    "showing": "Mostrando",
+    "to": "a",
+    "of": "de",
+    "pleaseWait": "Por favor, aguarde enquanto buscamos as informações"
+  },
+  "menu": {
+    "dashboard": "Dashboard",
+    "clients": "Clientes",
+    "users": "Usuários",
+    "admin": "Administração",
+    "logout": "Sair do Sistema",
+    "home": "Início"
+  },
+  "header": {
+    "template": "TEMPLATE",
+    "admin": "admin"
+  },
+  "footer": {
+    "allRightsReserved": "Todos os direitos reservados",
+    "developedBy": "Desenvolvido por",
+    "since": "desde",
+    "version": "Versão",
+    "copyright": "Copyright ©",
+    "environment": {
+      "development": "AMBIENTE DE DESENVOLVIMENTO",
+      "production": "AMBIENTE DE PRODUÇÃO"
+    },
+    "printForm": "Imprimir Formulário"
+  },
+  "auth": {
+    "login": {
+      "title": "Login",
+      "email": "E-mail",
+      "password": "Senha",
+      "rememberMe": "Lembrar-me",
+      "forgotPassword": "Esqueci minha senha",
+      "noAccount": "Não tem conta?",
+      "signUp": "Cadastre-se",
+      "signIn": "Entrar",
+      "signInWithGoogle": "Entrar com Google"
+    },
+    "register": {
+      "title": "Cadastro",
+      "name": "Nome",
+      "email": "E-mail",
+      "password": "Senha",
+      "confirmPassword": "Confirmar Senha",
+      "alreadyHaveAccount": "Já tem conta?",
+      "signIn": "Entrar",
+      "signUp": "Cadastrar"
+    }
+  }
+}

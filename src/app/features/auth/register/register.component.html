@@ -1,0 +1,282 @@
+<!-- ===== register.component.html ===== -->
+<div class="login-container">
+    <!-- Left Panel - Brand & Features -->
+    <div class="login-brand-panel">
+        <div class="brand-content">
+            <!-- Logo Container -->
+            <div class="brand-logo">
+                <div class="logo-icon">
+                    <i class="pi pi-desktop"></i>
+                </div>
+            </div>
+
+            <!-- Brand Title -->
+            <div class="brand-title">
+                <h1>{{ 'register.brand.title' | translate }}</h1>
+                <p class="brand-subtitle">{{ 'register.brand.subtitle' | translate }}</p>
+            </div>
+
+            <!-- Features List -->
+            <div class="brand-features">
+                <div class="feature-item">
+                    <i class="pi pi-check"></i>
+                    <span>{{ 'register.brand.features.financialManagement' | translate }}</span>
+                </div>
+
+                <div class="feature-item">
+                    <i class="pi pi-check"></i>
+                    <span>{{ 'register.brand.features.whatsappIntegration' | translate }}</span>
+                </div>
+
+                <div class="feature-item">
+                    <i class="pi pi-check"></i>
+                    <span>{{ 'register.brand.features.realtimeReports' | translate }}</span>
+                </div>
+
+                <div class="feature-item">
+                    <i class="pi pi-check"></i>
+                    <span>{{ 'register.brand.features.secureAccess' | translate }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Panel - Register Form -->
+    <div class="login-form-panel">
+        <div class="form-container">
+            <!-- Welcome Section -->
+            <div class="welcome-section">
+                <!-- Language Selector -->
+                <div style="position: absolute; top: 20px; right: 20px;">
+                    <app-language-selector />
+                </div>
+
+                <div class="welcome-icon">
+                    <i class="pi pi-user-plus"></i>
+                </div>
+
+                <h2 class="welcome-title">{{ 'register.welcome.title' | translate }}</h2>
+                <p class="welcome-description">
+                    {{ showFullForm ? ('register.welcome.descriptionFull' | translate) : ('register.welcome.descriptionInvite' | translate) }}
+                </p>
+            </div>
+
+            <!-- Register Form -->
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="login-form">
+
+                <!-- ========================================
+                     CAMPOS COMPLETOS (só aparecem se showFullForm = true)
+                     ======================================== -->
+                <ng-container *ngIf="showFullForm">
+                    <!-- Name -->
+                    <div class="form-field">
+                        <label for="name" class="field-label">
+                            {{ 'register.form.nameLabel' | translate }}
+                            <span class="required-mark">{{ 'register.form.requiredMark' | translate }}</span>
+                        </label>
+                        <div class="input-container">
+                            <i class="pi pi-user input-icon"></i>
+                            <input
+                                id="name"
+                                type="text"
+                                pInputText
+                                formControlName="name"
+                                [placeholder]="'register.form.namePlaceholder' | translate"
+                                class="form-input with-icon"
+                                [class.input-error]="registerForm.get('name')?.invalid && registerForm.get('name')?.touched"
+                            />
+                        </div>
+                        <small *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched" class="error-message">
+                            {{ 'register.form.nameMinLength' | translate }}
+                        </small>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-field">
+                        <label for="email" class="field-label">
+                            {{ 'register.form.emailLabel' | translate }}
+                            <span class="required-mark">{{ 'register.form.requiredMark' | translate }}</span>
+                        </label>
+                        <div class="input-container">
+                            <i class="pi pi-envelope input-icon"></i>
+                            <input
+                                id="email"
+                                type="email"
+                                pInputText
+                                formControlName="email"
+                                [placeholder]="'register.form.emailPlaceholder' | translate"
+                                class="form-input with-icon"
+                                [class.input-error]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"
+                            />
+                        </div>
+                        <small *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="error-message">
+                            {{ 'register.form.emailInvalid' | translate }}
+                        </small>
+                    </div>
+
+                    <!-- Phone -->
+                    <div class="form-field">
+                        <label for="phoneNumber" class="field-label">
+                            {{ 'register.form.phoneLabel' | translate }}
+                            <span class="required-mark">{{ 'register.form.requiredMark' | translate }}</span>
+                        </label>
+                        <div class="input-container">
+                            <i class="pi pi-phone input-icon"></i>
+                            <input
+                                id="phoneNumber"
+                                type="tel"
+                                pInputText
+                                formControlName="phoneNumber"
+                                [placeholder]="'register.form.phonePlaceholder' | translate"
+                                class="form-input with-icon"
+                                [class.input-error]="registerForm.get('phoneNumber')?.invalid && registerForm.get('phoneNumber')?.touched"
+                            />
+                        </div>
+                        <small *ngIf="registerForm.get('phoneNumber')?.invalid && registerForm.get('phoneNumber')?.touched" class="error-message">
+                            {{ 'register.form.phoneMinLength' | translate }}
+                        </small>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-field">
+                        <label for="password" class="field-label">
+                            {{ 'register.form.passwordLabel' | translate }}
+                            <span class="required-mark">{{ 'register.form.requiredMark' | translate }}</span>
+                        </label>
+                        <div class="input-container">
+                            <i class="pi pi-lock input-icon"></i>
+                            <input
+                                id="password"
+                                [type]="showPassword ? 'text' : 'password'"
+                                pInputText
+                                formControlName="password"
+                                [placeholder]="'register.form.passwordPlaceholder' | translate"
+                                class="form-input with-icon with-toggle"
+                                [class.input-error]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
+                            />
+                            <i
+                                [class]="showPassword ? 'pi pi-eye-slash' : 'pi pi-eye'"
+                                class="password-toggle-icon"
+                                (click)="showPassword = !showPassword"
+                            ></i>
+                        </div>
+                        <small *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="error-message">
+                            {{ 'register.form.passwordMinLength' | translate }}
+                        </small>
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="form-field">
+                        <label for="confirmPassword" class="field-label">
+                            {{ 'register.form.confirmPasswordLabel' | translate }}
+                            <span class="required-mark">{{ 'register.form.requiredMark' | translate }}</span>
+                        </label>
+                        <div class="input-container">
+                            <i class="pi pi-lock input-icon"></i>
+                            <input
+                                id="confirmPassword"
+                                [type]="showConfirmPassword ? 'text' : 'password'"
+                                pInputText
+                                formControlName="confirmPassword"
+                                [placeholder]="'register.form.confirmPasswordPlaceholder' | translate"
+                                class="form-input with-icon with-toggle"
+                                [class.input-error]="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched"
+                            />
+                            <i
+                                [class]="showConfirmPassword ? 'pi pi-eye-slash' : 'pi pi-eye'"
+                                class="password-toggle-icon"
+                                (click)="showConfirmPassword = !showConfirmPassword"
+                            ></i>
+                        </div>
+                        <small *ngIf="registerForm.hasError('passwordMismatch') && registerForm.get('confirmPassword')?.touched" class="error-message">
+                            {{ 'register.form.passwordMismatch' | translate }}
+                        </small>
+                    </div>
+                </ng-container>
+
+                <!-- ========================================
+                     TERMOS (sempre visível)
+                     ======================================== -->
+                <div class="form-field checkbox-field">
+                    <p-checkbox
+                        [binary]="true"
+                        formControlName="acceptTerms"
+                        inputId="acceptTerms"
+                    ></p-checkbox>
+                    <label for="acceptTerms" class="checkbox-label">
+                        {{ 'register.form.acceptTerms' | translate }}
+                        <a href="#" class="link">{{ 'register.form.termsOfUse' | translate }}</a>
+                        {{ 'register.form.and' | translate }}
+                        <a href="#" class="link">{{ 'register.form.privacy' | translate }}</a>
+                    </label>
+                </div>
+
+                <!-- ========================================
+                     BOTÕES
+                     ======================================== -->
+
+                <!-- ESTADO INICIAL: Só Invite Code -->
+                <ng-container *ngIf="!showFullForm">
+                    <!-- Botão Google (desabilitado até aceitar termos) -->
+                    <button
+                        type="button"
+                        pButton
+                        [label]="'register.form.continueWithGoogle' | translate"
+                        icon="pi pi-google"
+                        class="login-button google-button"
+                        [disabled]="!registerForm.get('acceptTerms')?.value"
+                        (click)="loginWithGoogle()"
+                    ></button>
+
+                    <div class="divider">
+                        <span class="divider-text">{{ 'register.form.divider' | translate }}</span>
+                    </div>
+
+                    <!-- Botão Criar Conta (sempre habilitado) -->
+                    <button
+                        type="button"
+                        pButton
+                        [label]="'register.form.createAccountWithoutGoogle' | translate"
+                        icon="pi pi-user-plus"
+                        class="login-button secondary-button"
+                        [disabled]="!registerForm.get('acceptTerms')?.value"
+                        (click)="toggleFullForm()"
+                    ></button>
+                </ng-container>
+
+                <!-- FORMULÁRIO COMPLETO: Botões de Submit e Voltar -->
+                <ng-container *ngIf="showFullForm">
+                    <button
+                        type="submit"
+                        pButton
+                        [label]="'register.form.createAccountButton' | translate"
+                        icon="pi pi-check"
+                        class="login-button"
+                        [loading]="isLoading"
+                        [disabled]="registerForm.invalid"
+                    ></button>
+
+                    <button
+                        type="button"
+                        pButton
+                        [label]="'register.form.backButton' | translate"
+                        icon="pi pi-arrow-left"
+                        class="login-button secondary-button"
+                        (click)="backToInitialState()"
+                    ></button>
+                </ng-container>
+
+                <!-- Back to Login -->
+                <div class="create-account-section">
+                    <p class="create-account-text">{{ 'register.form.footer.hasAccount' | translate }}</p>
+                    <button type="button" pButton class="create-account-button" (click)="onBackToLogin()">
+                        <i class="pi pi-sign-in"></i>
+                        <span>{{ 'register.form.footer.login' | translate }}</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<p-toast position="top-right"></p-toast>

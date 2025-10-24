@@ -1,0 +1,78 @@
+<nav class="sidebar" [class.open]="isOpen()">
+    <!-- Header -->
+    <div class="sidebar-header">
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="pi pi-desktop"></i>
+            </div>
+            <div class="logo-text">{{ 'header.template' | translate }}</div>
+        </div>
+
+        <!-- ✅ Botão X (fechar sidebar) -->
+        <button class="close-btn" (click)="closeRequest.emit()">
+            <i class="pi pi-times"></i>
+        </button>
+    </div>
+
+    <!-- Navigation -->
+    <div class="sidebar-nav">
+        @for (item of navigationItems(); track item.id) {
+        <div class="nav-group" [class.active]="isGroupActive(item)" [class.expanded]="item.expanded">
+
+            <!-- Single items (sem children) -->
+            @if (!item.children || item.children.length === 0) {
+            <div class="nav-item"
+                 [class.active]="isRouteActive(item.route)"
+                 (click)="navigateTo(item.route!)">
+                <div class="nav-item-content">
+                    <i [class]="item.icon"></i>
+                    <span>{{ item.label }}</span>
+                    @if (item.badge && item.badge > 0) {
+                    <span class="badge">{{ item.badge }}</span>
+                    }
+                </div>
+            </div>
+            }
+
+            <!-- Groups (com children) -->
+            @if (item.children && item.children.length > 0) {
+            <!-- Header do Grupo -->
+            <div class="nav-group-header"
+                 [class.active]="isGroupActive(item)"
+                 (click)="toggleGroup(item.id)">
+                <div class="nav-group-content">
+                    <i [class]="item.icon"></i>
+                    <span>{{ item.label }}</span>
+                    @if (item.badge && item.badge > 0) {
+                    <span class="badge">{{ item.badge }}</span>
+                    }
+                </div>
+                <i class="pi pi-chevron-down expand-icon"></i>
+            </div>
+
+            <!-- Itens do Grupo -->
+            <div class="nav-group-items">
+                @for (child of item.children; track child.id) {
+                <div class="nav-item"
+                     [class.active]="isRouteActive(child.route)"
+                     (click)="navigateTo(child.route!)">
+                    <div class="nav-item-content">
+                        <i [class]="child.icon"></i>
+                        <span>{{ child.label }}</span>
+                    </div>
+                </div>
+                }
+            </div>
+            }
+        </div>
+        }
+    </div>
+
+    <!-- Footer -->
+    <div class="sidebar-footer">
+        <button class="logout-btn" (click)="logout()">
+            <i class="pi pi-sign-out"></i>
+            <span>{{ 'menu.logout' | translate }}</span>
+        </button>
+    </div>
+</nav>
